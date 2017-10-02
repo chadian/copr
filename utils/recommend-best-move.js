@@ -1,7 +1,7 @@
 const Board = require('../board');
 const winnerOfBoard = require('./winner-of-board');
 
-function calculateBestMove(board, player) {
+function recommendBestMove(board, player) {
   const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
 
   const moves = emptySpots.map(emptySpot => {
@@ -18,4 +18,4 @@ function calculateBestMove(board, player) {
   return winningMoves.length ? winningMoves.pop().spot : null;
 }
 
-module.exports = calculateBestMove;
+module.exports = recommendBestMove;

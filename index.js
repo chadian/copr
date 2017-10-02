@@ -1,6 +1,6 @@
 const Board = require('./board');
 const Player = require('./player');
-const calculateBestMove = require('./utils/calculate-best-move');
+const recommendBestMove = require('./utils/recommend-best-move');
 
 const X = 'X';
 const O = 'O';
@@ -17,5 +17,5 @@ const copr = new Player(O);
 console.log('Starting with:');
 console.log(board.toString());
 
-const bestMoveForDavid = calculateBestMove(board, david);
+const bestMoveForDavid = recommendBestMove(board, david);
 console.log('best move for david', bestMoveForDavid);
