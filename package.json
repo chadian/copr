@@ -4,11 +4,14 @@
   "description": "CSS Operation Plan Response, css tic tac toe AI",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "author": "Chad Carbert",
   "license": "MIT",
   "dependencies": {
     "ramda": "^0.9.3"
+  },
+  "devDependencies": {
+    "jasmine": "^2.8.0"
   }
 }
