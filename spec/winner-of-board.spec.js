@@ -1,9 +1,6 @@
 const Board = require('../board');
 const winnerOfBoard = require('../utils/winner-of-board');
-
-const X = 'X';
-const O = 'O';
-const _ = Board.EMPTY_SPOT_SYMBOL;
+const { X, O, _ } = require('./stubs/player');
 
 describe("winner-of-board", () => {
   describe("returns the winning character of a board", () => {
