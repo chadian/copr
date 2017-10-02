@@ -2,12 +2,7 @@ const { splitEvery } = require('ramda');
 
 class Board {
   constructor(board) {
-    const _ = Board.EMPTY_SPOT_SYMBOL;
-    this.board = Array.isArray(board) ? board : [
-      'X',  _ , _ ,
-      'O', 'X', _ ,
-      'O',  _ , _ ,
-    ];
+    this.board = Array.isArray(board) ? board : [].fill(Board.EMPTY_SPOT_SYMBOL, 0, 9);
   }
 
   symbolAtSpot(index) {
