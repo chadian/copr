@@ -2,11 +2,28 @@ const { splitEvery } = require('ramda');
 
 class Board {
   constructor(board) {
-    this.board = Array.isArray(board) ? board : [].fill(Board.EMPTY_SPOT_SYMBOL, 0, 9);
+    if (!Array.isArray(board)) {
+      board = [];
+    }
+
+    if (board.length < 9) {
+      const difference = 9 - board.length;
+      board = board.concat(Array(difference).fill(Board.EMPTY_SPOT_SYMBOL));
+    };
+
+    if (board.length > 9) {
+      board = board.slice(0, 8);
+    }
+
+    this.board = board;
   }
 
   symbolAtSpot(index) {
     return this.board[index] || null;
+  }
+
+  isFull() {
+    return this.board.includes(Board.EMPTY_SPOT_SYMBOL) !== true;
   }
 
   spotsForSymbol(symbol) {
@@ -19,6 +36,10 @@ class Board {
     const newBoardArray = Array.from(this.board);
     newBoardArray[index] = symbol;
     return new Board(newBoardArray);
+  }
+
+  toArray() {
+    return this.board;
   }
 
   toHash() {
