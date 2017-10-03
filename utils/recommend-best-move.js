@@ -1,21 +1,18 @@
 const Board = require('../board');
-const winnerOfBoard = require('./winner-of-board');
+const scoreBoard = require('./score-board');
 
-function recommendBestMove(board, player) {
+function recommendBestMove(board, player, opponent) {
   const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
-
-  const moves = emptySpots.map(emptySpot => {
-    return {
+  const bestMove = emptySpots.reduce((bestMove, emptySpot) => {
+    const move = {
       spot: emptySpot,
-      board: board.makeMove(emptySpot, player.symbol)
-     };
-  });
+      score: scoreBoard(board.makeMove(emptySpot, player.symbol), player, opponent)
+    };
 
-  const winningMoves = moves.filter(
-    move => winnerOfBoard(move.board) === player.symbol
-  );
+    return bestMove.score >= move.score ? bestMove : move;
+  }, {});
 
-  return winningMoves.length ? winningMoves.pop().spot : null;
+  return bestMove.spot;
 }
 
 module.exports = recommendBestMove;

@@ -15,7 +15,7 @@ describe("recommend-best-move", () => {
         _ , _ , _ ,
       ]);
 
-      expect(recommendBestMove(board, playerX)).toBe(position.BOTTOM_LEFT);
+      expect(recommendBestMove(board, playerX, playerO)).toBe(position.BOTTOM_LEFT);
     });
 
     it("will recommend a horizontal winning move", () => {
@@ -25,7 +25,7 @@ describe("recommend-best-move", () => {
         X , _ , _ ,
       ]);
 
-      expect(recommendBestMove(board, playerO)).toBe(position.TOP_MIDDLE);
+      expect(recommendBestMove(board, playerO, playerX)).toBe(position.TOP_MIDDLE);
     });
 
     it("will recommend a vertical winning move", () => {
@@ -35,7 +35,7 @@ describe("recommend-best-move", () => {
         X , _ , _ ,
       ]);
 
-      expect(recommendBestMove(board, playerO)).toBe(position.TOP_MIDDLE);
+      expect(recommendBestMove(board, playerO, playerX)).toBe(position.TOP_MIDDLE);
     });
 
     it("will recommend for the correct symbol in a tie-breaking winning move", () => {
@@ -45,7 +45,17 @@ describe("recommend-best-move", () => {
         _ , _ , _ ,
       ]);
 
-      expect(recommendBestMove(board, playerX)).toBe(position.BOTTOM_LEFT);
+      expect(recommendBestMove(board, playerX, playerO)).toBe(position.BOTTOM_LEFT);
+    });
+
+    it("will recommend the center square given an empty board", () => {
+      const board = new Board([
+        _ , _ , _ ,
+        _ , _ , _ ,
+        _ , _ , _ ,
+      ]);
+
+      expect(recommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_MIDDLE);
     });
   });
 });
