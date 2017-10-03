@@ -1,4 +1,6 @@
 const Board = require('../board');
+const { X, O, _ } = require('./stubs/player');
+const postion = require('./stubs/position');
 
 describe("Board", () => {
   describe("constructor", () => {
@@ -35,4 +37,27 @@ describe("Board", () => {
       ]);
     });
   });
+
+  describe("#symbolAtSpot", () => {
+    it("returns the correct symbol at a given spot", () => {
+      const board = new Board([
+        X, O, O,
+        O, _, O,
+        O, O, O
+      ]);
+
+      expect(board.symbolAtSpot(postion.TOP_LEFT)).toBe(X);
+      expect(board.symbolAtSpot(postion.MIDDLE_MIDDLE)).toBe(_);
+    });
+
+    it("returns null for out of bounds", () => {
+      const board = new Board([
+        X, O, O,
+        O, _, O,
+        O, O, O
+      ]);
+
+      expect(board.symbolAtSpot(9)).toBe(null);
+    });
+  })
 });
