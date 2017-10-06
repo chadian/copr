@@ -1,5 +1,6 @@
 const Board = require('../board');
 const scoreBoard = require('./score-board');
+const { memoize } = require('ramda');
 
 function recommendBestMove(board, player, opponent) {
   const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
@@ -15,4 +16,4 @@ function recommendBestMove(board, player, opponent) {
   return bestMove.spot;
 }
 
-module.exports = recommendBestMove;
+module.exports = memoize(recommendBestMove);

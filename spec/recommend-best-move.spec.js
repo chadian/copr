@@ -1,3 +1,5 @@
+const proxyquire = require('proxyquire');
+
 const Board = require('../board');
 const recommendBestMove = require('../utils/recommend-best-move');
 const { playerX, playerO, _ } = require('./stubs/player');
@@ -47,7 +49,9 @@ describe("recommend-best-move", () => {
 
       expect(recommendBestMove(board, playerX, playerO)).toBe(position.BOTTOM_LEFT);
     });
+  });
 
+  describe("follows what I would think is common sense...", () => {
     it("will recommend the center square given an empty board", () => {
       const board = new Board([
         _ , _ , _ ,
@@ -56,6 +60,52 @@ describe("recommend-best-move", () => {
       ]);
 
       expect(recommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_MIDDLE);
+    });
+  });
+
+  describe("cache", () => {
+    let spiedRecommendBestMove;
+    let scoreBoardSpy;
+
+    beforeEach(() => {
+      const scoreBoard = require('../utils/score-board');
+      // just re-hooking up the same module to itself but
+      // attaching the `scoreBoardSpy` first
+      const moduleStub = {
+        './score-board': scoreBoard
+      };
+
+      scoreBoardSpy = spyOn(moduleStub, './score-board').and.callThrough();
+      spiedRecommendBestMove = proxyquire('../utils/recommend-best-move', moduleStub);
+    });
+
+    afterEach(() => {
+      // safe guard, turning off proxyquire
+      proxyquire.preserveCache();
+    })
+
+    it("pulls from cache on subsequent calls with the same args", () => {
+      const board = new Board([
+        _ , _ , _ ,
+        _ , _ , _ ,
+        _ , _ , _ ,
+      ]);
+
+      // call for move recommendation, result should be accurate
+      expect(spiedRecommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_MIDDLE);
+
+      // given an empty board, each spot will be called once with
+      // `scoreBoard` _within_ `recommend-best-move` once. Recursive
+      // calls of `scoreBoard` on itself will not be captured by the spy
+      // since the spy has only been applied via proxyquire within
+      // `recommend-best-move`.
+      expect(scoreBoardSpy.calls.count()).toBe(9);
+
+      // make another call, result should be accurate
+      expect(spiedRecommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_MIDDLE);
+
+      // relying on cache, no additional calls to scoreBoard should have been made
+      expect(scoreBoardSpy.calls.count()).toBe(9);
     });
   });
 });
