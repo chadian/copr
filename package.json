@@ -9,6 +9,7 @@
   "author": "Chad Carbert",
   "license": "MIT",
   "dependencies": {
+    "proxyquire": "^1.8.0",
     "ramda": "^0.9.3"
   },
   "devDependencies": {
