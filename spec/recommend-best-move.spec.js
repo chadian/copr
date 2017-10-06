@@ -1,6 +1,7 @@
 const proxyquire = require('proxyquire');
 
 const Board = require('../board');
+const Player = require('../player');
 const recommendBestMove = require('../utils/recommend-best-move');
 const { playerX, playerO, _ } = require('./stubs/player');
 const position = require('./stubs/position');
@@ -94,7 +95,7 @@ describe("recommend-best-move", () => {
       // call for move recommendation, result should be accurate
       expect(spiedRecommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_MIDDLE);
 
-      // given an empty board, each spot will be called once with
+      // given an empty board, each empty spot will be called once with
       // `scoreBoard` _within_ `recommend-best-move` once. Recursive
       // calls of `scoreBoard` on itself will not be captured by the spy
       // since the spy has only been applied via proxyquire within
@@ -106,6 +107,43 @@ describe("recommend-best-move", () => {
 
       // relying on cache, no additional calls to scoreBoard should have been made
       expect(scoreBoardSpy.calls.count()).toBe(9);
+    });
+
+    it("pulls from cache a generic solution given the same board with different players", () => {
+      const board = new Board([
+        X , _ , O ,
+        X , _ , _ ,
+        _ , _ , _ ,
+      ]);
+
+      expect(spiedRecommendBestMove(board, playerX, playerO)).toBe(position.BOTTOM_LEFT);
+
+      // given an empty board, each empty spot will be called once with
+      // `scoreBoard` _within_ `recommend-best-move` once. Recursive
+      // calls of `scoreBoard` on itself will not be captured by the spy
+      // since the spy has only been applied via proxyquire within
+      // `recommend-best-move`.
+      // six empty spots on the board => 6 calls
+      expect(scoreBoardSpy.calls.count()).toBe(6);
+
+      const A = '😀';
+      const B = '👾';
+      playerA = new Player(A);
+      playerB = new Player(B);
+      const abBoardArray = board
+        .toArray()
+        .join(',')
+        .replace(X, A)
+        .replace(O, B)
+        .split(',');
+
+      const abBoard = new Board(abBoardArray);
+
+      expect(spiedRecommendBestMove(abBoard, playerA, playerB)).toBe(position.BOTTOM_LEFT);
+
+      // still only six calls were made, memoized on generic solution
+      // regardless of players passed in
+      expect(scoreBoardSpy.calls.count()).toBe(6);
     });
   });
 });
