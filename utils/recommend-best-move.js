@@ -19,7 +19,7 @@ function recommendBestMove(board, player, opponent) {
 module.exports = memoizeWith(
   (board, player, opponent) => {
     const PLAYER_CACHE_CHAR = 'X';
-    const OPPONENT_CACHE_CHAR = '_';
+    const OPPONENT_CACHE_CHAR = 'O';
     const cacheKey = board
       .toArray()
       .join(',')
