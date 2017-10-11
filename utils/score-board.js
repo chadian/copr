@@ -2,6 +2,7 @@ const Board = require('../board');
 const Player = require('../player');
 const winnerOfBoard = require('./winner-of-board');
 const { mean } = require('ramda');
+const buildMoveTree = require('./build-move-tree');
 
 const POINTS = {
   WIN: 1,
@@ -10,21 +11,24 @@ const POINTS = {
 }
 
 function scoreBoard(board, previousPlayer, nextPlayer) {
-  if (winnerOfBoard(board)) {
-    return POINTS.WIN;
-  }
+  const moveTree = buildMoveTree(null, board, previousPlayer, nextPlayer);
 
-  if (board.isFull()) {
-    return POINTS.DRAW;
-  }
+  const traverseTree = moveNode => {
+    const { board, children } = moveNode;
 
-  const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
-  const nextPlayerMoveScores = emptySpots.map(emptySpot => {
-    const newBoard = board.makeMove(emptySpot, nextPlayer.symbol)
-    return scoreBoard(newBoard, nextPlayer, previousPlayer) * -1;
-  });
+    if (winnerOfBoard(board)) {
+      return POINTS.WIN;
+    }
 
-  return mean(nextPlayerMoveScores);
+    if (board.isFull()) {
+      return POINTS.DRAW;
+    }
+
+    const childrenScores = children.map(node => traverseTree(node) * -1);
+    return mean(childrenScores);
+  };
+
+  return traverseTree(moveTree);
 }
 
 module.exports = scoreBoard;
