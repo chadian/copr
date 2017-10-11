@@ -26,4 +26,94 @@ describe("score-board", () => {
 
     expect(scoreBoard(board, playerX, playerO)).toBe(0);
   });
+
+  describe("scores mirrored boards with the same score", () => {
+    it("is the same for + cross moves", () => {
+      const top = new Board([
+        _, X, _,
+        _, _, _,
+        _, _, _,
+      ]);
+
+      const left = new Board([
+        _, _, _,
+        X, _, _,
+        _, _, _,
+      ]);
+
+      const right = new Board([
+        _, _, _,
+        _, _, X,
+        _, _, _,
+      ]);
+
+      const bottom = new Board([
+        _, _, _,
+        _, _, _,
+        _, X, _,
+      ]);
+
+      expect(
+        scoreBoard(top, playerX, playerO)
+      ).toBeCloseTo(
+        scoreBoard(right, playerX, playerO)
+      );
+
+      expect(
+        scoreBoard(right, playerX, playerO)
+      ).toBeCloseTo(
+        scoreBoard(bottom, playerX, playerO)
+      );
+
+      expect(
+        scoreBoard(bottom, playerX, playerO)
+      ).toBeCloseTo(
+        scoreBoard(left, playerX, playerO)
+      );
+    });
+
+    it("is the same for corner moves", () => {
+      const topLeftBoard = new Board([
+        X, _, _,
+        _, _, _,
+        _, _, _,
+      ]);
+
+      const topRightBoard = new Board([
+        _, _, X,
+        _, _, _,
+        _, _, _,
+      ]);
+
+      const bottomLeftBoard = new Board([
+        _, _, _,
+        _, _, _,
+        X, _, _,
+      ]);
+
+      const bottomRightBoard = new Board([
+        _, _, _,
+        _, _, _,
+        _, _, X,
+      ]);
+
+      expect(
+        scoreBoard(topLeftBoard, playerX, playerO)
+      ).toBeCloseTo(
+        scoreBoard(topRightBoard, playerX, playerO)
+      );
+
+      expect(
+        scoreBoard(topRightBoard, playerX, playerO)
+      ).toBeCloseTo(
+        scoreBoard(bottomLeftBoard, playerX, playerO)
+      );
+
+      expect(
+        scoreBoard(bottomLeftBoard, playerX, playerO)
+      ).toBeCloseTo(
+        scoreBoard(bottomRightBoard, playerX, playerO)
+      );
+    })
+  });
 });
