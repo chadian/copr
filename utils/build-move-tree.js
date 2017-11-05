@@ -7,9 +7,11 @@ function buildMoveTree(parent, board, previousPlayer, nextPlayer) {
     board,
   };
 
-  node.children = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL).map(
-    spot => buildMoveTree(node, board.makeMove(spot, nextPlayer.symbol), previousPlayer, nextPlayer)
+  const childNodes = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL).map(
+    spot => buildMoveTree(node, board.makeMove(spot, nextPlayer.symbol), nextPlayer, previousPlayer)
   );
+
+  node.children = childNodes;
 
   return node;
 };
