@@ -12,23 +12,22 @@ const POINTS = {
 
 function scoreBoard(board, previousPlayer, nextPlayer) {
   const moveTree = buildMoveTree(null, board, previousPlayer, nextPlayer);
-
-  const traverseTree = moveNode => {
-    const { board, children } = moveNode;
-
-    if (winnerOfBoard(board)) {
-      return POINTS.WIN;
-    }
-
-    if (board.isFull()) {
-      return POINTS.DRAW;
-    }
-
-    const childrenScores = children.map(node => traverseTree(node) * -1);
-    return mean(childrenScores);
-  };
-
-  return traverseTree(moveTree);
+  return recursiveScore(moveTree);
 }
+
+function recursiveScore(moveNode) {
+  const { board, children } = moveNode;
+
+  if (winnerOfBoard(board)) {
+    return POINTS.WIN;
+  }
+
+  if (board.isFull()) {
+    return POINTS.DRAW;
+  }
+
+  const childrenScores = children.map(node => recursiveScore(node) * -1);
+  return mean(childrenScores);
+};
 
 module.exports = scoreBoard;
