@@ -11,7 +11,7 @@ const POINTS = {
 }
 
 function scoreBoard(board, previousPlayer, nextPlayer) {
-  const moveTree = buildMoveTree(null, board, previousPlayer, nextPlayer);
+  const moveTree = buildMoveTree(board, previousPlayer, nextPlayer);
   return recursiveScore(moveTree);
 }
 
