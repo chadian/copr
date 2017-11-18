@@ -1,19 +1,28 @@
 const Board = require('../board');
-const { memoizeWith } = require('ramda');
+const { memoizeBoardWithPlayer } = require('./cache');
+const winnerOfBoard = require('./winner-of-board');
 
-function buildMoveTree(parent, board, previousPlayer, nextPlayer) {
-  const node = {
-    parent,
-    board,
-  };
+const memoizedBuild = memoizeBoardWithPlayer(buildMoveTree);
 
-  const childNodes = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL).map(
-    spot => buildMoveTree(node, board.makeMove(spot, nextPlayer.symbol), nextPlayer, previousPlayer)
-  );
+function buildMoveTree(board, previousPlayer, nextPlayer) {
+  const node = { board };
 
-  node.children = childNodes;
+  let children;
+  if (winnerOfBoard(board)) {
+    children = [];
+  } else {
+    children = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL).map(
+      spot => memoizedBuild(
+        board.makeMove(spot, nextPlayer.symbol),
+        nextPlayer,
+        previousPlayer
+      )
+    );
+  }
+
+  node.children = children;
 
   return node;
 };
 
-module.exports = buildMoveTree;
+module.exports = memoizedBuild;
