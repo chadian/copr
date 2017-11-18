@@ -2,7 +2,7 @@ const Board = require('../board');
 const { uniq } = require('ramda');
 
 function winnerOfBoard(board) {
-  let winners = Board.LINES
+  let winners = Board.WINNING_LINES
     .map(line => {
       const symbol = board.symbolAtSpot(line[0]);
 
@@ -25,7 +25,7 @@ function winnerOfBoard(board) {
   }
 
   if (winners.length > 1) {
-    throw 'should not be more than one winner on the board';
+    throw 'There should not be more than one winner of the board';
   }
 
   return winners[0];

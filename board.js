@@ -54,7 +54,7 @@ class Board {
 }
 
 Board.EMPTY_SPOT_SYMBOL = '_';
-Board.LINES = (function() {
+Board.WINNING_LINES = (function() {
   const combinations = [];
 
   // horizontal rows
