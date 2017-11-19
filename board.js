@@ -76,4 +76,6 @@ Board.WINNING_LINES = (function() {
   return combinations;
 })();
 
+Board.generateEmptyBoard = () => new Board(Array(8).fill(Board.EMPTY_SPOT_SYMBOL));
+
 module.exports = Board;
