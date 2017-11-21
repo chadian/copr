@@ -83,6 +83,8 @@ const computedStyles = {
   },
 
   aiChoice(board, recommendationIndex) {
+    if (!recommendationIndex) return '';
+
     // given the board:
     //  create a selector for the human state of checkboxes,
     //  the ai state of checkboxes
@@ -90,7 +92,8 @@ const computedStyles = {
     const selector = mapBoardToSelector(board, PLAYER.HUMAN_SYMBOL, PLAYER.HUMAN_STRING) +
       ' ~ ' +
       mapBoardToSelector(board, PLAYER.AI_SYMBOL, PLAYER.AI_STRING) +
-      fullId(PLAYER.AI_STRING, BOARD_ELEMENT.LABEL, recommendationIndex);
+      ' ~ ' +
+      '#' + fullId(PLAYER.AI_STRING, BOARD_ELEMENT.LABEL, recommendationIndex);
 
     return new Style(selector, {
         'display': 'block',
