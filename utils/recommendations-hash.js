@@ -1,4 +1,5 @@
 const buildMoveTree = require('./build-move-tree');
+const recommendBestMove = require('./recommend-best-move');
 
 module.exports = function recommendationHash(board, playerX, playerO) {
   const hash = {};
