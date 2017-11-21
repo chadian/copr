@@ -36,4 +36,5 @@ const markupBits = [
 
 ];
 
-fs.writeFile('index.html', markupBits.join(''), console.log);
+fs.mkdir('./dist');
+fs.writeFile('./dist/index.html', markupBits.join(''), console.log);
