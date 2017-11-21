@@ -34,7 +34,8 @@ const boardSquare = (index) => {
 };
 
 module.exports = {
-  aiCheckbox, humanCheckbox,
-  aiLabel, humanLabel,
+  humanCheckbox,
+  aiCheckbox,
+  aiLabel,
   boardSquare
 }
