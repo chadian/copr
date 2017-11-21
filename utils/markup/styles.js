@@ -10,7 +10,7 @@ class Style {
 
   toString() {
     const selectors = this.selectors.join(',');
-    const styles = this.style.map((prop, value) => `${prop}:${value};`).join('');
+    const styles = Object.keys(this.style).map((prop) => `${prop}:${this.style[prop]};`).join('');
     return `${ selectors } {${ styles }}`;
   }
 }
