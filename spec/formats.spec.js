@@ -19,19 +19,19 @@ describe('formats', () => {
 
   describe('classFormat', () => {
     it('handles type only classes', () => {
-      expect(classFormat('box')).toBe('box');
+      expect(classFormat(null, 'box')).toBe('box');
     });
 
     it('handles type and piece index classes', () => {
-      expect(classFormat('box', null, 8)).toBe('box box-8');
+      expect(classFormat(null, 'box', 8)).toBe('box box-8');
     });
 
     it('handles type and prefix classes', () => {
-      expect(classFormat('box', 'HUMAN')).toBe('box human-box');
+      expect(classFormat('HUMAN', 'box')).toBe('box human-box');
     });
 
     it('handles the full type, prefix and piece index classes', () => {
-      expect(classFormat('box', 'HUMAN', '8')).toBe(
+      expect(classFormat('HUMAN', 'box', '8')).toBe(
         'box human-box box-8 human-box-8'
       );
     });

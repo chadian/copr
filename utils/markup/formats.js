@@ -4,7 +4,7 @@ const baseFormat = (parts) => parts.map(
 
 const fullId = (prefix, type, pieceIndex) => baseFormat([prefix, type, pieceIndex]);
 
-const classFormat = (type, prefix, pieceIndex) => {
+const classFormat = (prefix, type, pieceIndex) => {
   const classStrings = [];
 
   if (type) classStrings.push(baseFormat([type]));
