@@ -1,3 +1,9 @@
+### project ignores
+
+dist/
+
+### nodejs boilerplate ignores
+
 # Logs
 logs
 *.log
