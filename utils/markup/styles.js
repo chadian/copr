@@ -50,6 +50,10 @@ style.playerResult = new Style(
   }
 );
 
+style.hideAllCheckboxes = new Style(
+  'input[type=checkbox]', { 'display': 'none' }
+);
+
 const mapBoardToSelector = (board, forSymbol, prefix) => {
   const selector = i =>  `#${ fullId(prefix, BOARD_ELEMENT.CHECKBOX, i) }`;
 

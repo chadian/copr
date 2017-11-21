@@ -31,6 +31,7 @@ const markupBits = [
   baseStyles.boardSquare.toString(),
   baseStyles.boardSquareClear.toString(),
   baseStyles.playerResult.toString(),
+  baseStyles.hideAllCheckboxes.toString(),
   mapJoin(computedStyles.humanResult),
   mapJoin(computedStyles.aiResult),
   mapJoin(
@@ -40,6 +41,7 @@ const markupBits = [
       .filter(([_, recommendation]) => !!recommendation)
   ),
   '</style>',
+
 ];
 
 if (!fs.existsSync('./dist')) fs.mkdirSync('./dist');
