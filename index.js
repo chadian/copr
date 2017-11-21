@@ -15,7 +15,8 @@ const {
 } = require('./utils/markup/styles');
 
 const hash = recommendationHash(Board.generateEmptyBoard(), new Player('X'), new Player('O'));
-const mapJoin = (fn) => BOARD_INDEXES.map(fn).join('');
+
+const mapJoin = (fn, arr = BOARD_INDEXES) => arr.map(fn).join('');
 
 const markupBits = [
 
@@ -32,9 +33,14 @@ const markupBits = [
   baseStyles.playerResult.toString(),
   mapJoin(computedStyles.humanResult),
   mapJoin(computedStyles.aiResult),
+  mapJoin(
+    ([board, recommendation]) => computedStyles.aiChoice(board, recommendation),
+    Object.keys(hash)
+      .map(board => [board.split(','), hash[board]])
+      .filter(([_, recommendation]) => !!recommendation)
+  ),
   '</style>',
-
 ];
 
-fs.mkdir('./dist');
-fs.writeFile('./dist/index.html', markupBits.join(''), console.log);
+if (!fs.existsSync('./dist')) fs.mkdirSync('./dist');
+fs.writeFile('./dist/index.html', markupBits.join(''));
