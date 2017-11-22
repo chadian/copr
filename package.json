@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "proxyquire": "^1.8.0",
-    "ramda": "^0.9.3"
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
     "jasmine": "^2.8.0"
