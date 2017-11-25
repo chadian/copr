@@ -67,8 +67,8 @@ const mapBoardToSelector = (board, forSymbol, prefix) => {
 
 const computedStyles = {
   humanResult(index) {
-    const selector = `#${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked
-      ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.LABEL, index)}`;
+    const selector = `#${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked`
+      + ` ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.LABEL, index)}`;
 
     return new Style(
       selector,
@@ -77,8 +77,8 @@ const computedStyles = {
   },
 
   aiResult(index) {
-    const selector = `#${fullId(PLAYER.AI_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked
-      ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.AI_STRING, BOARD_ELEMENT.RESULT, index)}`;
+    const selector = `#${fullId(PLAYER.AI_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked`
+      + ` ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.AI_STRING, BOARD_ELEMENT.RESULT, index)}`;
 
     return new Style(
       selector,
