@@ -4,6 +4,7 @@
   "description": "CSS Operation Plan Response, css tic tac toe AI",
   "main": "index.js",
   "scripts": {
+    "build": "node index",
     "test": "jasmine"
   },
   "author": "Chad Carbert",
