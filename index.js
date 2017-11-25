@@ -4,6 +4,8 @@ const recommendationHash = require('./utils/recommendations-hash');
 const { BOARD_INDEXES } = require('./utils/markup/constants');
 const fs = require('fs');
 const {
+  CONTAINER_START,
+  CONTAINER_END,
   humanCheckbox,
   aiCheckbox,
   aiLabel,
@@ -19,6 +21,7 @@ const hash = recommendationHash(Board.generateEmptyBoard(), new Player('X'), new
 const mapJoin = (fn, arr = BOARD_INDEXES) => arr.map(fn).join('');
 
 const markupBits = [
+  CONTAINER_START,
 
   // templates
   mapJoin(humanCheckbox),
@@ -30,6 +33,8 @@ const markupBits = [
   '<style>',
   baseStyles.boardSquare.toString(),
   baseStyles.boardSquareClear.toString(),
+  baseStyles.horizontalGrid.toString(),
+  baseStyles.verticalGrid.toString(),
   baseStyles.playerResult.toString(),
   baseStyles.hideAllCheckboxes.toString(),
   mapJoin(computedStyles.humanResult),
@@ -42,6 +47,7 @@ const markupBits = [
   ),
   '</style>',
 
+  CONTAINER_END
 ];
 
 if (!fs.existsSync('./dist')) fs.mkdirSync('./dist');

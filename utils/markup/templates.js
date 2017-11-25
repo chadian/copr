@@ -33,9 +33,14 @@ const boardSquare = (index) => {
   `;
 };
 
+const CONTAINER_START = '<html><head><title>COPR, CSS Operation Plan Response</title></head><body>';
+const CONTAINER_END = '</body></html>'
+
 module.exports = {
   humanCheckbox,
   aiCheckbox,
   aiLabel,
-  boardSquare
+  boardSquare,
+  CONTAINER_START,
+  CONTAINER_END
 }

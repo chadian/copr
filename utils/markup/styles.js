@@ -21,12 +21,36 @@ style.boardSquare = new Style(
   `.${BOARD_ELEMENT.SQUARE}`,
   {
     float: 'left',
-    width: '25px',
-    height: '25px',
-    border: '1px solid red',
+    width: '50px',
+    height: '50px',
     position: 'relative',
   }
 );
+
+style.horizontalGrid = new Style(
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(1),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(2),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(3),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(4),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(5),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(6)`,
+  {
+    'border-bottom': '5px solid #94b7ed'
+  }
+);
+
+style.verticalGrid = new Style(
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(1),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(2),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(4),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(5),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(7),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(8)`,
+  {
+    'border-right': '5px solid #94b7ed'
+  }
+);
+
 
 style.boardSquareClear = new Style(
   // clear float for every third piece
@@ -53,6 +77,19 @@ style.playerResult = new Style(
 style.hideAllCheckboxes = new Style(
   'input[type=checkbox]', { 'display': 'none' }
 );
+
+style.windowBorder = new Style('html', {
+  'border': '0.5rem solid #fff',
+  'width': '100 %',
+  'height': '100 %',
+  'box-sizing': 'border-box'
+});
+
+style.textGlow = new Style('*', {
+  'text-shadow': '0px 0px 13px rgba(255, 255, 255, 0.5)'
+});
+
+style.h1 = new Style('h1', { 'letter-spacing': '0.75rem' });
 
 const mapBoardToSelector = (board, forSymbol, prefix) => {
   const selector = i =>  `#${ fullId(prefix, BOARD_ELEMENT.CHECKBOX, i) }`;
