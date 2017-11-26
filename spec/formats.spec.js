@@ -26,6 +26,10 @@ describe('formats', () => {
       expect(classFormat(null, 'box', 8)).toBe('box box-8');
     });
 
+    it('handles type and piece index classes with index of 0', () => {
+      expect(classFormat(null, 'box', 0)).toBe('box box-0');
+    });
+
     it('handles type and prefix classes', () => {
       expect(classFormat('HUMAN', 'box')).toBe('box human-box');
     });
@@ -33,6 +37,12 @@ describe('formats', () => {
     it('handles the full type, prefix and piece index classes', () => {
       expect(classFormat('HUMAN', 'box', '8')).toBe(
         'box human-box box-8 human-box-8'
+      );
+    });
+
+    it('handles the full type, prefix and piece index classes with index of 0', () => {
+      expect(classFormat('HUMAN', 'box', 0)).toBe(
+        'box human-box box-0 human-box-0'
       );
     });
   });
