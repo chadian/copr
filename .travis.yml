@@ -4,12 +4,17 @@ node_js:
   - "7"
   - "8"
 script:
-  - npm run build
-  - npm run test
-deploy:
-  provider: pages
-  local_dir: dist
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  on:
-    branch: master
+- npm run build
+- npm run test
+jobs:
+  include:
+    - stage: deploy
+      script: npm run build
+      deploy:
+        node_js: "6"
+        provider: pages
+        local_dir: dist
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN
+        on:
+          branch: master
