@@ -40,10 +40,9 @@ const CONTAINER_START = `
 <html>
   <head>
   <title>COPR, CSS Operation Plan Response</title>
-  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
   </head>
   <body><div class="window">`;
-  const CONTAINER_END = '</div></body></html>'
+const CONTAINER_END = '<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet"></div></body></html>';
 
 module.exports = {
   humanCheckbox,
