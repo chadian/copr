@@ -91,7 +91,7 @@ style.hideAllCheckboxes = new Style(
 );
 
 style.window = new Style('.window', {
-  'border': '0.5rem solid #fff',
+  'border': '0.25rem solid #fff',
   'width': '650px',
   'max-width': '100%',
   'box-sizing': 'border-box',
