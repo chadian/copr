@@ -28,6 +28,9 @@ const boardSquare = (index) => {
       <div id="${fullId(PLAYER.AI_STRING, BOARD_ELEMENT.RESULT, index)}"
            class="${classFormat(PLAYER.AI_STRING, BOARD_ELEMENT.RESULT, index)}">
       </div>
+      <div id="${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.RESULT, index)}"
+           class="${classFormat(PLAYER.HUMAN_STRING, BOARD_ELEMENT.RESULT, index)}">
+      </div>
       ${humanLabel(index)}
     </div>
   `;

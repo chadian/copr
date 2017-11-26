@@ -16,16 +16,26 @@ describe("styles", () => {
   });
 
   describe("computedStyles", () => {
-    const { humanResult, aiResult } = computedStyles;
+    const {
+      humanResult,
+      aiResult,
+      hiddenHumanLabel
+    } = computedStyles;
 
     describe("humanResult", () => {
-      it("has a selector with a matching checkbox and result", () => {
-        expect(humanResult(6).toString()).toContain('#human-checkbox-6:checked ~ .square #human-label-6');
+      it("has a selector with a matching human checkbox and human result", () => {
+        expect(humanResult(6).toString()).toContain('#human-checkbox-6:checked ~ .square #human-result-6');
+      });
+    });
+
+    describe("hiddenHumanLabel", () => {
+      it("has a selector with a matching human checkbox and human label", () => {
+        expect(hiddenHumanLabel(6).toString()).toContain('#human-checkbox-6:checked ~ .square #human-label-6');
       });
     });
 
     describe("aiResult", () => {
-      it("has a selector with a matching checkbox and result", () => {
+      it("has a selector with a matching ai checkbox and ai result", () => {
         expect(aiResult(6).toString()).toContain('#ai-checkbox-6:checked ~ .square #ai-result-6');
       });
     });

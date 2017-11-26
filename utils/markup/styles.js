@@ -172,18 +172,27 @@ const mapBoardToSelector = (board, forSymbol, prefix) => {
 const computedStyles = {
   humanResult(index) {
     const selector = `#${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked`
-      + ` ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.LABEL, index)}`;
+      + ` ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.RESULT, index)}`;
 
     const svg = `<svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg"><title>x</title><path d="M5 5l100 100m0-100L5 105" stroke="#94B7ED" stroke-width="15" fill="none" /></svg>`
     return new Style(
       selector,
       {
+        'width': '100%',
+        'height': '100%',
         'background-image': `url("data:image/svg+xml;base64,${Buffer(svg).toString('base64')}")`,
         'background-size': '85%',
         'background-position': 'center',
         'background-repeat': 'no-repeat'
       }
     );
+  },
+
+  hiddenHumanLabel(index) {
+    const selector = `#${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked`
+      + ` ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.LABEL, index)}`;
+
+    return new Style(selector, { 'display': 'none' });
   },
 
   aiResult(index) {

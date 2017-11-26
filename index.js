@@ -59,6 +59,7 @@ const markupBits = [
   baseStyles.verticalRhythmReset.toString(),
   baseStyles.verticalRhythm.toString(),
   mapJoin(computedStyles.humanResult),
+  mapJoin(computedStyles.hiddenHumanLabel),
   mapJoin(computedStyles.aiResult),
   mapJoin(
     ([board, recommendation]) => computedStyles.aiChoice(board, recommendation),
