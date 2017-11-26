@@ -51,6 +51,7 @@ const markupBits = [
   baseStyles.textGlow.toString(),
   baseStyles.headings.toString(),
   baseStyles.h1.toString(),
+  baseStyles.h2.toString(),
   baseStyles.button.toString(),
   baseStyles.clearFix.toString(),
   baseStyles.beforeBoard.toString(),

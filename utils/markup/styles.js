@@ -20,7 +20,7 @@ const style = {};
 style.base = new Style(['html', 'body'], {
   'background-color': '#101721',
   'font-family': 'VT323, Helvetica Neue, Helvetica, Arial, sans-serif',
-  'font-size': '25px',
+  'font-size': '30px',
   'color': '#94b7ed',
   'padding': '0',
   'margin': '0',
@@ -107,7 +107,12 @@ style.textGlow = new Style('*', {
 });
 
 style.h1 = new Style('h1', {
-  'letter-spacing': '0.75rem',
+  'font-size': '1rem',
+  'letter-spacing': '1.5rem',
+});
+
+style.h2 = new Style('h2', {
+  'font-size': '1.25rem',
 });
 
 style.headings = new Style(['h1', 'h2', 'h3'], {
@@ -120,7 +125,7 @@ style.button = new Style('.button', {
   'color': '#fff',
   'text-decoration': 'none',
   'border': '1px solid white',
-  'padding': '0.5em 1em'
+  'padding': '0.25rem 0.75rem'
 });
 
 style.clearFix = new Style('.clear-fix', {
