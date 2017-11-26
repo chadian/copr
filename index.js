@@ -23,20 +23,40 @@ const mapJoin = (fn, arr = BOARD_INDEXES) => arr.map(fn).join('');
 const markupBits = [
   CONTAINER_START,
 
-  // templates
+  `<h1>COPR</h1>`,
+  `<h2>CSS Operation Plan Response</h2>`,
+  `<p>Shall we play a game?</p>`,
+
+  `<p class="before-board"></p>`,
+  // board and mechanics
   mapJoin(humanCheckbox),
   mapJoin(aiCheckbox),
   mapJoin(aiLabel),
   mapJoin(boardSquare),
+  `<div class="clear-fix"></div>`,
+  `<p class="after-board"></p>`,
+
+  `<a class="button" href=".">Restart</a>`,
 
   // styles
   '<style>',
+  baseStyles.base.toString(),
+  baseStyles.window.toString(),
   baseStyles.boardSquare.toString(),
   baseStyles.boardSquareClear.toString(),
   baseStyles.horizontalGrid.toString(),
   baseStyles.verticalGrid.toString(),
   baseStyles.playerResult.toString(),
   baseStyles.hideAllCheckboxes.toString(),
+  baseStyles.textGlow.toString(),
+  baseStyles.headings.toString(),
+  baseStyles.h1.toString(),
+  baseStyles.button.toString(),
+  baseStyles.clearFix.toString(),
+  baseStyles.beforeBoard.toString(),
+  baseStyles.afterBoard.toString(),
+  baseStyles.verticalRhythmReset.toString(),
+  baseStyles.verticalRhythm.toString(),
   mapJoin(computedStyles.humanResult),
   mapJoin(computedStyles.aiResult),
   mapJoin(
