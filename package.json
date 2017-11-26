@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node index",
+    "gzip": "node gzip",
     "test": "jasmine"
   },
   "author": "Chad Carbert",
