@@ -90,6 +90,12 @@ style.hideAllCheckboxes = new Style(
   'input[type=checkbox]', { 'display': 'none' }
 );
 
+style.hideAiLabels = new Style(
+`.${PLAYER.AI_STRING}-${BOARD_ELEMENT.LABEL}`, {
+  'opacity': '0',
+  'display': 'none'
+});
+
 style.window = new Style('.window', {
   'border': '0.25rem solid #fff',
   'width': '650px',
@@ -134,14 +140,10 @@ style.clearFix = new Style('.clear-fix', {
   'margin': '0'
 });
 
-style.beforeBoard = new Style('.before-board', {
-
+style.board = new Style('.board', {
+  'padding': '1em 0',
+  'position': 'relative',
 });
-
-style.afterBoard = new Style('.after-board', {
-  'margin-top': '1.5em'
-});
-
 
 style.verticalRhythmReset = new Style(
   [
@@ -212,7 +214,7 @@ const computedStyles = {
   },
 
   aiChoice(board, recommendationIndex) {
-    if (!recommendationIndex) return '';
+    if (typeof recommendationIndex !== 'number') return '';
 
     // given the board:
     //  create a selector for the human state of checkboxes,
@@ -225,10 +227,24 @@ const computedStyles = {
       '#' + fullId(PLAYER.AI_STRING, BOARD_ELEMENT.LABEL, recommendationIndex);
 
     return new Style(selector, {
-        'display': 'block',
-        'width': '20px',
-        'height': '20px',
-        'background': 'green'
+      'opacity': '1',
+      'display': 'block',
+
+      'padding-top': 'calc(50% - 1em)',
+      'box-sizing': 'border-box',
+      'padding-left': '1em',
+      'position': 'absolute',
+      'width': '100%',
+      'height': '100%',
+      'background': 'rgba(0, 0, 0, 0.97)',
+      'top': '0',
+      'bottom': '0',
+      'left': '0',
+      'right': '0',
+      'margin': '0',
+      'cursor': 'pointer',
+      // z-index to appear relative board squares
+      'z-index': '1',
     });
   }
 };

@@ -11,15 +11,16 @@ const checkbox = (prefix, index) => {
 const aiCheckbox = (index) => checkbox(PLAYER.AI_STRING, index);
 const humanCheckbox = (index) => checkbox(PLAYER.HUMAN_STRING, index);
 
-const label = (prefix, index) => {
+const label = (prefix, index, labelText="") => {
   return `<label
     id="${fullId(prefix, BOARD_ELEMENT.LABEL, index)}"
     for="${fullId(prefix, BOARD_ELEMENT.CHECKBOX, index)}"
     class="${classFormat(prefix, BOARD_ELEMENT.LABEL, index)}">
+      ${labelText}
     </label>`;
 }
 
-const aiLabel = (index) => label(PLAYER.AI_STRING, index);
+const aiLabel = (index) => label(PLAYER.AI_STRING, index, "Best move calculated, click to proceed...");
 const humanLabel = (index) => label(PLAYER.HUMAN_STRING, index);
 
 const boardSquare = (index) => {
