@@ -12,13 +12,53 @@ const {
   boardSquare
 } = require('./utils/markup/templates');
 const {
+  StyleSheet,
   baseStyles,
   computedStyles
 } = require('./utils/markup/styles');
 
 const hash = recommendationHash(Board.generateEmptyBoard(), new Player('X'), new Player('O'));
+const boardMap = (fn) => BOARD_INDEXES.map(fn);
+const recommendationStyles = hash => {
+  const styles = Object.keys(hash)
+    .filter(board => hash[board] !== null)
+    .map(board => {
+      board = board.split(',');
+      const recommendation = hash[board];
+      return computedStyles.aiChoice(board, recommendation);
+    });
 
-const mapJoin = (fn, arr = BOARD_INDEXES) => arr.map(fn).join('');
+  return styles;
+};
+
+const logicalStyleSheet = new StyleSheet();
+logicalStyleSheet.add(
+  ...boardMap(computedStyles.humanResult),
+  ...boardMap(computedStyles.hiddenHumanLabel),
+  ...boardMap(computedStyles.aiResult),
+  ...recommendationStyles(hash)
+);
+
+const criticalStyleSheet = new StyleSheet();
+criticalStyleSheet.add(
+  baseStyles.base,
+  baseStyles.window,
+  baseStyles.boardSquare,
+  baseStyles.boardSquareClear,
+  baseStyles.horizontalGrid,
+  baseStyles.verticalGrid,
+  baseStyles.playerResult,
+  baseStyles.hideAllCheckboxes,
+  baseStyles.hideAiLabels,
+  baseStyles.textGlow,
+  baseStyles.headings,
+  baseStyles.h1,
+  baseStyles.h2,
+  baseStyles.button,
+  baseStyles.clearFix,
+  baseStyles.verticalRhythmReset,
+  baseStyles.verticalRhythm
+);
 
 const markupBits = [
   CONTAINER_START,
@@ -29,10 +69,10 @@ const markupBits = [
 
   `<div class="board">`,
   // board and mechanics
-  mapJoin(humanCheckbox),
-  mapJoin(aiCheckbox),
-  mapJoin(aiLabel),
-  mapJoin(boardSquare),
+  boardMap(humanCheckbox).join(''),
+  boardMap(aiCheckbox).join(''),
+  boardMap(aiLabel).join(''),
+  boardMap(boardSquare).join(''),
   `<div class="clear-fix"></div>`,
   `</div>`,
 
@@ -40,32 +80,8 @@ const markupBits = [
 
   // styles
   '<style>',
-  baseStyles.base.toString(),
-  baseStyles.window.toString(),
-  baseStyles.boardSquare.toString(),
-  baseStyles.boardSquareClear.toString(),
-  baseStyles.horizontalGrid.toString(),
-  baseStyles.verticalGrid.toString(),
-  baseStyles.playerResult.toString(),
-  baseStyles.hideAllCheckboxes.toString(),
-  baseStyles.hideAiLabels.toString(),
-  baseStyles.textGlow.toString(),
-  baseStyles.headings.toString(),
-  baseStyles.h1.toString(),
-  baseStyles.h2.toString(),
-  baseStyles.button.toString(),
-  baseStyles.clearFix.toString(),
-  baseStyles.verticalRhythmReset.toString(),
-  baseStyles.verticalRhythm.toString(),
-  mapJoin(computedStyles.humanResult),
-  mapJoin(computedStyles.hiddenHumanLabel),
-  mapJoin(computedStyles.aiResult),
-  mapJoin(
-    ([board, recommendation]) => computedStyles.aiChoice(board, recommendation),
-    Object.keys(hash)
-      .map(board => [board.split(','), hash[board]])
-      .filter(([_, recommendation]) => recommendation !== null)
-  ),
+  criticalStyleSheet.toString(),
+  logicalStyleSheet.toString(),
   '</style>',
 
   CONTAINER_END

@@ -15,6 +15,25 @@ class Style {
   }
 }
 
+class StyleSheet {
+  constructor() {
+    this.styles = [];
+  }
+
+  add(...styles) {
+    styles.forEach(style => {
+      if (! style instanceof Style) throw new TypeError('Can only add styles of instance Style');
+    });
+    this.styles = this.styles.concat(styles);
+
+    return this;
+  }
+
+  toString() {
+    return this.styles.map(style => style.toString()).join('');
+  }
+}
+
 const style = {};
 
 style.base = new Style(['html', 'body'], {
@@ -251,6 +270,7 @@ const computedStyles = {
 
 module.exports = {
   Style,
+  StyleSheet,
   baseStyles: style,
   computedStyles
 };
