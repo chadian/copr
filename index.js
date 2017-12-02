@@ -64,7 +64,7 @@ const markupBits = [
     ([board, recommendation]) => computedStyles.aiChoice(board, recommendation),
     Object.keys(hash)
       .map(board => [board.split(','), hash[board]])
-      .filter(([_, recommendation]) => !!recommendation)
+      .filter(([_, recommendation]) => recommendation !== null)
   ),
   '</style>',
 
