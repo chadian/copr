@@ -1,8 +1,21 @@
 const { Readable, PassThrough } = require('stream');
 const fs = require('fs');
+const path = require('path');
 const zlib = require('zlib');
 
+const hasAccess = (dir) => {
+  try {
+    fs.accessSync(dir);
+    return true;
+  } catch(exception) {
+    return false;
+  }
+};
+
 function saveToFile(string, filePath, gzip=false) {
+  const dirPath = path.dirname(filePath);
+  if (!hasAccess(dirPath)) fs.mkdirSync(dirPath);
+
   const readStream = new Readable();
   const passThroughStream = new PassThrough();
   const gzipStream = zlib.createGzip({ level: 9 });
