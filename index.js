@@ -2,7 +2,11 @@ const Board = require('./board');
 const Player = require('./player');
 const recommendationHash = require('./utils/recommendations-hash');
 const { BOARD_INDEXES } = require('./utils/markup/constants');
-const fs = require('fs');
+const { saveToFile } = require('./utils/files');
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const isProduction = NODE_ENV === 'production';
+
 const {
   CONTAINER_START,
   CONTAINER_END,
@@ -36,11 +40,13 @@ logicalStyleSheet.add(
   ...boardMap(computedStyles.humanResult),
   ...boardMap(computedStyles.hiddenHumanLabel),
   ...boardMap(computedStyles.aiResult),
-  ...recommendationStyles(hash)
+  ...recommendationStyles(hash),
+  baseStyles.finishedLoading
 );
 
 const criticalStyleSheet = new StyleSheet();
 criticalStyleSheet.add(
+  baseStyles.loading,
   baseStyles.base,
   baseStyles.window,
   baseStyles.boardSquare,
@@ -60,8 +66,13 @@ criticalStyleSheet.add(
   baseStyles.verticalRhythm
 );
 
-const markupBits = [
+const logicalCssPath = isProduction ? process.env.LOGICAL_CSS_PATH : './' || './';
+
+const markup = [
   CONTAINER_START,
+  '<style>',
+  criticalStyleSheet.toString(),
+  '</style>',
 
   `<h1>COPR</h1>`,
   `<h2>CSS Operation Plan Response</h2>`,
@@ -77,15 +88,9 @@ const markupBits = [
   `</div>`,
 
   `<a class="button" href=".">Restart</a>`,
-
-  // styles
-  '<style>',
-  criticalStyleSheet.toString(),
-  logicalStyleSheet.toString(),
-  '</style>',
-
+  `<link rel="stylesheet" type="text/css" href="${ logicalCssPath }logical.css" />`,
   CONTAINER_END
 ];
 
-if (!fs.existsSync('./dist')) fs.mkdirSync('./dist');
-fs.writeFile('./dist/index.html', markupBits.join(''));
+saveToFile(markup.join(''), './dist/index.html');
+saveToFile(logicalStyleSheet.toString(), './dist/logical.css', isProduction);

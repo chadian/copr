@@ -134,6 +134,7 @@ style.textGlow = new Style('*', {
 style.h1 = new Style('h1', {
   'font-size': '1rem',
   'letter-spacing': '1.5rem',
+  'margin-top': '0'
 });
 
 style.h2 = new Style('h2', {
@@ -163,6 +164,14 @@ style.board = new Style('.board', {
   'padding': '1em 0',
   'position': 'relative',
 });
+
+style.loading = new Style('.board > .square', {
+  'display': 'none'
+});
+
+style.finishedLoading = new Style('.board > .square', {
+  'display': 'block'
+})
 
 style.verticalRhythmReset = new Style(
   [
