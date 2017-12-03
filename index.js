@@ -66,7 +66,7 @@ criticalStyleSheet.add(
   baseStyles.verticalRhythm
 );
 
-const logicalCssPath = isProduction ? process.env.LOGICAL_CSS_PATH : './' || './';
+const logicalCssPath = (isProduction ? process.env.LOGICAL_CSS_PATH : './') || './';
 
 const markup = [
   CONTAINER_START,
