@@ -66,7 +66,7 @@ criticalStyleSheet.add(
   baseStyles.verticalRhythm
 );
 
-const logicalCssPath = (isProduction ? process.env.LOGICAL_CSS_PATH : './') || './';
+const logicalCssUrlPath = isProduction && process.env.LOGICAL_CSS_URL_PATH ? process.env.LOGICAL_CSS_URL_PATH : './'
 
 const markup = [
   CONTAINER_START,
@@ -88,9 +88,10 @@ const markup = [
   `</div>`,
 
   `<a class="button" href=".">Restart</a>`,
-  `<link rel="stylesheet" type="text/css" href="${ logicalCssPath }logical.css" />`,
+  `<link rel="stylesheet" type="text/css" href="${ logicalCssUrlPath }logical.css" />`,
   CONTAINER_END
 ];
 
-saveToFile(markup.join(''), './dist/index.html');
-saveToFile(logicalStyleSheet.toString(), './dist/logical.css', isProduction);
+saveToFile(markup.join(''), './dist/index.html', false);
+const useGzipForExternalCss = isProduction && process.env.LOGICAL_CSS_URL_PATH;
+saveToFile(logicalStyleSheet.toString(), './dist/logical.css', useGzipForExternalCss);
