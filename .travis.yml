@@ -12,7 +12,6 @@ jobs:
     - stage: deploy
       script:
         - npm run build
-        - npm run gzip
       deploy:
         node_js: "6"
         provider: pages
