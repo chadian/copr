@@ -5,6 +5,8 @@ node_js:
   - "7"
   - "8"
 script:
+# install additional testing dependencies
+- npm install --only=development
 - npm run build
 - npm run test
 jobs:
