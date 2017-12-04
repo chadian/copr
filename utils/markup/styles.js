@@ -115,6 +115,14 @@ style.hideAiLabels = new Style(
   'display': 'none'
 });
 
+style.hideAiWinContainer = new Style('#aiWin', {
+  display: 'none'
+});
+
+style.hideAiDrawContainer = new Style('#aiDraw', {
+  display: 'none'
+});
+
 style.window = new Style('.window', {
   'border': '0.25rem solid #fff',
   'width': '650px',
@@ -151,7 +159,8 @@ style.button = new Style('.button', {
   'color': '#fff',
   'text-decoration': 'none',
   'border': '1px solid white',
-  'padding': '0.25rem 0.75rem'
+  'padding': '0.25rem 0.75rem',
+  'font-size': '1rem'
 });
 
 style.clearFix = new Style('.clear-fix', {
@@ -290,9 +299,24 @@ const computedStyles = {
       ' ~ ' +
       '#aiWin';
 
-    return new Style(`/* ${board.toString() } */` + selector, {
+    return new Style(selector, {
       display: 'block',
-      color: 'green'
+
+      'font-size': '1.5rem',
+      'padding': '1em',
+      'box-sizing': 'border-box',
+      'position': 'absolute',
+      'width': '100%',
+      'height': '100%',
+      'background': 'rgba(0, 0, 0, 0.85)',
+      'top': '0',
+      'bottom': '0',
+      'left': '0',
+      'right': '0',
+      'margin': '0',
+      'cursor': 'pointer',
+      // z-index to appear relative board squares
+      'z-index': '1',
     });
   },
 
@@ -309,7 +333,22 @@ const computedStyles = {
 
     return new Style(selector, {
       display: 'block',
-      color: 'red'
+
+      'font-size': '1.5rem',
+      'padding': '1em',
+      'box-sizing': 'border-box',
+      'position': 'absolute',
+      'width': '100%',
+      'height': '100%',
+      'background': 'rgba(0, 0, 0, 0.85)',
+      'top': '0',
+      'bottom': '0',
+      'left': '0',
+      'right': '0',
+      'margin': '0',
+      'cursor': 'pointer',
+      // z-index to appear relative board squares
+      'z-index': '1',
     });
   },
 };
