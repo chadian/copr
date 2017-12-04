@@ -20,7 +20,7 @@ const label = (prefix, index, labelText="") => {
     </label>`;
 }
 
-const aiLabel = (index) => label(PLAYER.AI_STRING, index, "Best move calculated, click to proceed...");
+const aiLabel = (index) => label(PLAYER.AI_STRING, index, `Best move calculated. <div class="button">Proceed</div>`);
 const humanLabel = (index) => label(PLAYER.HUMAN_STRING, index);
 
 const boardSquare = (index) => {

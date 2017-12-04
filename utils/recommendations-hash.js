@@ -1,5 +1,6 @@
 const buildMoveTree = require('./build-move-tree');
 const recommendBestMove = require('./recommend-best-move');
+const winnerOfBoard = require('./winner-of-board');
 const Board = require('../board');
 
 module.exports = function recommendationHash(board, player, opponent) {
@@ -13,6 +14,8 @@ module.exports = function recommendationHash(board, player, opponent) {
     // hash already exists, no work to be done
     if (hash[hashString]) return;
 
+    node.children.forEach(node => moveForNode(node));
+
     let bestMove;
     try {
       bestMove = recommendBestMove(board, player, opponent);
@@ -20,8 +23,21 @@ module.exports = function recommendationHash(board, player, opponent) {
       bestMove = null;
     }
 
-    hash[hashString] = bestMove;
-    node.children.forEach(node => moveForNode(node));
+    const totalMovesMade = board.toArray().filter(
+      spot => spot === player.symbol || spot === opponent.symbol
+    ).length;
+
+    if (winnerOfBoard(board)) {
+      hash[hashString] = 'WIN';
+    } else if (totalMovesMade % 2 === 0) {
+      // only provide recommendations on moves where the opponent
+      // has already completed their move.
+      return;
+    } else if (typeof bestMove === 'number') {
+      hash[hashString] = bestMove;
+    } else {
+      hash[hashString] = 'DRAW';
+    }
   }
 
   moveForNode(moveTree);

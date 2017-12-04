@@ -3,10 +3,6 @@ const Player = require('./player');
 const recommendationHash = require('./utils/recommendations-hash');
 const { BOARD_INDEXES } = require('./utils/markup/constants');
 const { saveToFile } = require('./utils/files');
-const NODE_ENV = process.env.NODE_ENV || 'development';
-
-const isProduction = NODE_ENV === 'production';
-
 const {
   CONTAINER_START,
   CONTAINER_END,
@@ -21,15 +17,26 @@ const {
   computedStyles
 } = require('./utils/markup/styles');
 
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const isProduction = NODE_ENV === 'production';
+
 const hash = recommendationHash(Board.generateEmptyBoard(), new Player('O'), new Player('X'));
 const boardMap = (fn) => BOARD_INDEXES.map(fn);
-const recommendationStyles = hash => {
+const resultStyles = hash => {
   const styles = Object.keys(hash)
     .filter(board => hash[board] !== null)
     .map(board => {
       board = board.split(',');
-      const recommendation = hash[board];
-      return computedStyles.aiChoice(board, recommendation);
+      const result = hash[board];
+
+      switch(true) {
+        case typeof result === 'number':
+          return computedStyles.aiChoice(board, result);
+        case result === 'WIN':
+          return computedStyles.aiWin(board);
+        case result === 'DRAW':
+          return computedStyles.aiDraw(board);
+      }
     });
 
   return styles;
@@ -40,7 +47,7 @@ logicalStyleSheet.add(
   ...boardMap(computedStyles.humanResult),
   ...boardMap(computedStyles.hiddenHumanLabel),
   ...boardMap(computedStyles.aiResult),
-  ...recommendationStyles(hash),
+  ...resultStyles(hash),
   baseStyles.finishedLoading
 );
 
@@ -49,6 +56,7 @@ criticalStyleSheet.add(
   baseStyles.loading,
   baseStyles.base,
   baseStyles.window,
+  baseStyles.board,
   baseStyles.boardSquare,
   baseStyles.boardSquareClear,
   baseStyles.horizontalGrid,
@@ -84,6 +92,8 @@ const markup = [
   boardMap(aiCheckbox).join(''),
   boardMap(aiLabel).join(''),
   boardMap(boardSquare).join(''),
+  `<div id="aiWin">AI wins.</div>`,
+  `<div id="aiDraw">AI draws.</div>`,
   `<div class="clear-fix"></div>`,
   `</div>`,
 

@@ -22,7 +22,7 @@ class StyleSheet {
 
   add(...styles) {
     styles.forEach(style => {
-      if (! style instanceof Style) throw new TypeError('Can only add styles of instance Style');
+      if (!(style instanceof Style)) throw new TypeError(`Can only add styles of instance Style, not ${typeof style}`);
     });
     this.styles = this.styles.concat(styles);
 
@@ -162,7 +162,6 @@ style.clearFix = new Style('.clear-fix', {
 
 style.board = new Style('.board', {
   'padding': '1em 0',
-  'position': 'relative',
 });
 
 style.loading = new Style('.board > .square', {
@@ -171,7 +170,7 @@ style.loading = new Style('.board > .square', {
 
 style.finishedLoading = new Style('.board > .square', {
   'display': 'block'
-})
+});
 
 style.verticalRhythmReset = new Style(
   [
@@ -188,6 +187,7 @@ style.verticalRhythmReset = new Style(
 style.verticalRhythm = new Style('* + *', {
   'margin-top': '0.5em'
 });
+
 const mapBoardToSelector = (board, forSymbol, prefix) => {
   const selector = i =>  `#${ fullId(prefix, BOARD_ELEMENT.CHECKBOX, i) }`;
 
@@ -219,10 +219,13 @@ const computedStyles = {
   },
 
   hiddenHumanLabel(index) {
-    const selector = `#${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked`
+    const humanSelected = `#${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked`
       + ` ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.LABEL, index)}`;
 
-    return new Style(selector, { 'display': 'none' });
+    const aiSelected = `#${fullId(PLAYER.AI_STRING, BOARD_ELEMENT.CHECKBOX, index)}:checked`
+      + ` ~ .${BOARD_ELEMENT.SQUARE} #${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.LABEL, index)}`;
+
+    return new Style([ humanSelected, aiSelected ], { 'display': 'none' });
   },
 
   aiResult(index) {
@@ -274,7 +277,41 @@ const computedStyles = {
       // z-index to appear relative board squares
       'z-index': '1',
     });
-  }
+  },
+
+  aiWin(board) {
+    // given the board:
+    //  create a selector for the human state of checkboxes,
+    //  the ai state of checkboxes
+    //  and the aiWin container
+    const selector = mapBoardToSelector(board, PLAYER.HUMAN_SYMBOL, PLAYER.HUMAN_STRING) +
+      ' ~ ' +
+      mapBoardToSelector(board, PLAYER.AI_SYMBOL, PLAYER.AI_STRING) +
+      ' ~ ' +
+      '#aiWin';
+
+    return new Style(`/* ${board.toString() } */` + selector, {
+      display: 'block',
+      color: 'green'
+    });
+  },
+
+  aiDraw(board) {
+    // given the board:
+    //  create a selector for the human state of checkboxes,
+    //  the ai state of checkboxes
+    //  and the aiDraw container
+    const selector = mapBoardToSelector(board, PLAYER.HUMAN_SYMBOL, PLAYER.HUMAN_STRING) +
+      ' ~ ' +
+      mapBoardToSelector(board, PLAYER.AI_SYMBOL, PLAYER.AI_STRING) +
+      ' ~ ' +
+      '#aiDraw';
+
+    return new Style(selector, {
+      display: 'block',
+      color: 'red'
+    });
+  },
 };
 
 module.exports = {
