@@ -21,7 +21,7 @@ const {
   computedStyles
 } = require('./utils/markup/styles');
 
-const hash = recommendationHash(Board.generateEmptyBoard(), new Player('X'), new Player('O'));
+const hash = recommendationHash(Board.generateEmptyBoard(), new Player('O'), new Player('X'));
 const boardMap = (fn) => BOARD_INDEXES.map(fn);
 const recommendationStyles = hash => {
   const styles = Object.keys(hash)

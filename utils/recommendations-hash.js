@@ -4,7 +4,7 @@ const Board = require('../board');
 
 module.exports = function recommendationHash(board, player, opponent) {
   const hash = {};
-  const moveTree = buildMoveTree(board, opponent, player);
+  const moveTree = buildMoveTree(board, player, opponent);
 
   const moveForNode = (node) => {
     const board = node.board;
