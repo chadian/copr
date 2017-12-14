@@ -97,26 +97,26 @@ describe("recommend-best-move", () => {
 
     it("pulls from cache on subsequent calls with the same args", () => {
       const board = new Board([
-        _ , _ , _ ,
+        X , O , _ ,
         _ , _ , _ ,
         _ , _ , _ ,
       ]);
 
-      // call for move recommendation, result should be accurate
-      expect(spiedRecommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_MIDDLE);
+      // call for move recommendation on spy
+      const initialRecommendation = spiedRecommendBestMove(board, playerX, playerO);
 
-      // given an empty board, each empty spot will be called once with
+      // given the board, each empty spot will be called once with
       // `scoreBoard` _within_ `recommend-best-move` once. Recursive
       // calls of `scoreBoard` on itself will not be captured by the spy
-      // since the spy has only been applied via proxyquire within
-      // `recommend-best-move`.
-      expect(scoreBoardSpy.calls.count()).toBe(9);
+      // since the spy has only been applied via proxyquiring the
+      // `recommend-best-move` module.
+      expect(scoreBoardSpy.calls.count()).toBe(7);
 
-      // make another call, result should be accurate
-      expect(spiedRecommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_MIDDLE);
+      // make another call
+      expect(spiedRecommendBestMove(board, playerX, playerO)).toBe(initialRecommendation);
 
       // relying on cache, no additional calls to scoreBoard should have been made
-      expect(scoreBoardSpy.calls.count()).toBe(9);
+      expect(scoreBoardSpy.calls.count()).toBe(7);
     });
 
     it("pulls from cache a generic solution given the same board with different players", () => {
@@ -126,9 +126,9 @@ describe("recommend-best-move", () => {
         _ , _ , _ ,
       ]);
 
-      expect(spiedRecommendBestMove(board, playerX, playerO)).toBe(position.BOTTOM_LEFT);
+      const initialRecommenation = spiedRecommendBestMove(board, playerX, playerO);
 
-      // given an empty board, each empty spot will be called once with
+      // each empty spot will be called once with
       // `scoreBoard` _within_ `recommend-best-move` once. Recursive
       // calls of `scoreBoard` on itself will not be captured by the spy
       // since the spy has only been applied via proxyquire within
@@ -149,7 +149,7 @@ describe("recommend-best-move", () => {
 
       const abBoard = new Board(abBoardArray);
 
-      expect(spiedRecommendBestMove(abBoard, playerA, playerB)).toBe(position.BOTTOM_LEFT);
+      expect(spiedRecommendBestMove(abBoard, playerA, playerB)).toBe(initialRecommenation);
 
       // still only six calls were made, memoized on generic solution
       // regardless of players passed in
