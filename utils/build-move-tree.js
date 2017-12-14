@@ -1,5 +1,8 @@
 const Board = require('../board');
+const { memoizeBoardWithPlayers } = require('./cache');
 const winnerOfBoard = require('./winner-of-board');
+
+const memoizedBuild = memoizeBoardWithPlayers(buildMoveTree);
 
 function buildMoveTree(board, previousPlayer, nextPlayer) {
   const node = { board };
@@ -24,4 +27,4 @@ function buildMoveTree(board, previousPlayer, nextPlayer) {
   return node;
 };
 
-module.exports = buildMoveTree;
+module.exports = memoizedBuild;
