@@ -1,10 +1,11 @@
 const Board = require('../board');
 const scoreBoard = require('./score-board');
-const { memoizeBoardWithPlayer } = require('./cache');
+const { memoizeBoardWithPlayers } = require('./cache');
 
 function recommendBestMove(board, previousPlayer, nextPlayer) {
   const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
 
+  // with an empty board, choose the middle
   if (emptySpots.length === 9) {
     return 4;
   }
@@ -23,4 +24,4 @@ function recommendBestMove(board, previousPlayer, nextPlayer) {
   return bestMove.spot || null;
 }
 
-module.exports = memoizeBoardWithPlayer(recommendBestMove);
+module.exports = memoizeBoardWithPlayers(recommendBestMove);
