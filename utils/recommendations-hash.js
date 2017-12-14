@@ -18,7 +18,7 @@ module.exports = function recommendationHash(board, player, opponent) {
 
     let bestMove;
     try {
-      bestMove = recommendBestMove(board, player, opponent);
+      bestMove = recommendBestMove(board, opponent, player);
     } catch (exception) {
       bestMove = null;
     }

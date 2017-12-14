@@ -15,12 +15,12 @@ const cacheKeyGenerator = (board, playerSymbol, opponentSymbol) => {
   return cacheKey;
 };
 
-const memoizeBoardWithPlayer = fn => memoizeWith(
+const memoizeBoardWithPlayers = fn => memoizeWith(
   (board, playerA, playerB) => cacheKeyGenerator(board, playerA.symbol, playerB.symbol),
   fn
 );
 
 module.exports = {
   cacheKeyGenerator,
-  memoizeBoardWithPlayer
+  memoizeBoardWithPlayers
 };
