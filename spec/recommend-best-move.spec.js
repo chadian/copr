@@ -62,6 +62,16 @@ describe("recommend-best-move", () => {
 
       expect(recommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_MIDDLE);
     });
+
+    it("will choose to block a player", () => {
+      const board = new Board([
+        'O', '_', '_',
+        'X', 'X', '_',
+        '_', '_', '_',
+      ]);
+
+      expect(recommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_RIGHT);
+    });
   });
 
   describe("cache", () => {

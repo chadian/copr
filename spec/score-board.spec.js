@@ -14,7 +14,17 @@ describe("score-board", () => {
       O , _ , X ,
     ]);
 
-    expect(scoreBoard(board, playerX, playerO)).toBe(1);
+    expect(scoreBoard(board, playerX, playerX, playerO)).toBe(1);
+  });
+
+  it("scores a board resulting in a loss", () => {
+    const board = new Board([
+      X, _, _,
+      O, X, _,
+      O, _, X,
+    ]);
+
+    expect(scoreBoard(board, playerO, playerX, playerO)).toBe(-1);
   });
 
   it("scores a board resulting in a draw", () => {
@@ -24,7 +34,7 @@ describe("score-board", () => {
       O , X , O ,
     ]);
 
-    expect(scoreBoard(board, playerX, playerO)).toBe(0);
+    expect(scoreBoard(board, playerO, playerX, playerO)).toBe(0);
   });
 
   describe("scores mirrored boards with the same score", () => {
@@ -54,21 +64,21 @@ describe("score-board", () => {
       ]);
 
       expect(
-        scoreBoard(top, playerX, playerO)
-      ).toBeCloseTo(
-        scoreBoard(right, playerX, playerO)
+        scoreBoard(top, playerX, playerX, playerO)
+      ).toBe(
+        scoreBoard(right, playerX, playerX, playerO)
       );
 
       expect(
-        scoreBoard(right, playerX, playerO)
-      ).toBeCloseTo(
-        scoreBoard(bottom, playerX, playerO)
+        scoreBoard(right, playerX, playerX, playerO)
+      ).toBe(
+        scoreBoard(bottom, playerX, playerX, playerO)
       );
 
       expect(
-        scoreBoard(bottom, playerX, playerO)
-      ).toBeCloseTo(
-        scoreBoard(left, playerX, playerO)
+        scoreBoard(bottom, playerX, playerX, playerO)
+      ).toBe(
+        scoreBoard(left, playerX, playerX, playerO)
       );
     });
 
@@ -98,21 +108,21 @@ describe("score-board", () => {
       ]);
 
       expect(
-        scoreBoard(topLeftBoard, playerX, playerO)
-      ).toBeCloseTo(
-        scoreBoard(topRightBoard, playerX, playerO)
+        scoreBoard(topLeftBoard, playerX, playerX, playerO)
+      ).toBe(
+        scoreBoard(topRightBoard, playerX, playerX, playerO)
       );
 
       expect(
-        scoreBoard(topRightBoard, playerX, playerO)
-      ).toBeCloseTo(
-        scoreBoard(bottomLeftBoard, playerX, playerO)
+        scoreBoard(topRightBoard, playerX, playerX, playerO)
+      ).toBe(
+        scoreBoard(bottomLeftBoard, playerX, playerX, playerO)
       );
 
       expect(
-        scoreBoard(bottomLeftBoard, playerX, playerO)
-      ).toBeCloseTo(
-        scoreBoard(bottomRightBoard, playerX, playerO)
+        scoreBoard(bottomLeftBoard, playerX, playerX, playerO)
+      ).toBe(
+        scoreBoard(bottomRightBoard, playerX, playerX, playerO)
       );
     })
   });

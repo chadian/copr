@@ -1,18 +1,17 @@
 const Board = require('../board');
-const { memoizeBoardWithPlayer } = require('./cache');
 const winnerOfBoard = require('./winner-of-board');
-
-const memoizedBuild = memoizeBoardWithPlayer(buildMoveTree);
 
 function buildMoveTree(board, previousPlayer, nextPlayer) {
   const node = { board };
+  node.previousPlayer = previousPlayer;
+  node.nextPlayer = nextPlayer;
 
   let children;
   if (winnerOfBoard(board)) {
     children = [];
   } else {
     children = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL).map(
-      spot => memoizedBuild(
+      spot => buildMoveTree(
         board.makeMove(spot, nextPlayer.symbol),
         nextPlayer,
         previousPlayer
@@ -25,4 +24,4 @@ function buildMoveTree(board, previousPlayer, nextPlayer) {
   return node;
 };
 
-module.exports = memoizedBuild;
+module.exports = buildMoveTree;
