@@ -22,7 +22,7 @@ class StyleSheet {
 
   add(...styles) {
     styles.forEach(style => {
-      if (!(style instanceof Style)) throw new TypeError(`Can only add styles of instance Style, not ${typeof style}`);
+      if (!(style instanceof Style || style instanceof MediaQuery)) throw new TypeError(`Can only add styles of instance Style, not ${typeof style}`);
     });
     this.styles = this.styles.concat(styles);
 
@@ -33,6 +33,28 @@ class StyleSheet {
     return this.styles.map(style => style.toString()).join('');
   }
 }
+
+class MediaQuery {
+  constructor(mediaQuery) {
+    this.query = mediaQuery;
+    this.styles = [];
+  }
+
+  add(...styles) {
+    styles.forEach(style => {
+      if (!(style instanceof Style)) throw new TypeError(`Can only add styles of instance Style, not ${typeof style}`);
+    });
+    this.styles = this.styles.concat(styles);
+
+    return this;
+  }
+
+  toString() {
+    return `${this.query} { ${ this.styles.map(style => style.toString()).join('') } }`;
+  }
+}
+
+const expandedStyles = new MediaQuery('@media screen and (min-width: 550px)');
 
 const style = {};
 
