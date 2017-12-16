@@ -38,7 +38,7 @@ const boardSquare = (index) => {
 };
 
 const starOnGithub = `<a class="button" href="https://github.com/chadian/copr">Star on Github</a>`;
-const playAgain = `<a class="button" href=".">Want to play again?</a>`;
+const playAgain = `<a class="button" href=".">Play again</a>`;
 
 const containerStart = ({ head }) => `
 <!DOCTYPE html>
