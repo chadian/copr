@@ -4,17 +4,20 @@ const recommendationHash = require('./utils/recommendations-hash');
 const { BOARD_INDEXES } = require('./utils/markup/constants');
 const { saveToFile } = require('./utils/files');
 const {
-  CONTAINER_START,
-  CONTAINER_END,
+  containerStart,
+  containerEnd,
   humanCheckbox,
   aiCheckbox,
   aiLabel,
-  boardSquare
+  boardSquare,
+  starOnGithub,
+  playAgain
 } = require('./utils/markup/templates');
 const {
   StyleSheet,
   baseStyles,
-  computedStyles
+  computedStyles,
+  expandedStyles
 } = require('./utils/markup/styles');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -63,9 +66,9 @@ criticalStyleSheet.add(
   baseStyles.verticalGrid,
   baseStyles.playerResult,
   baseStyles.hideAllCheckboxes,
-  baseStyles.hideAiLabels,
-  baseStyles.hideAiWinContainer,
-  baseStyles.hideAiDrawContainer,
+  baseStyles.aiChoice,
+  baseStyles.aiWin,
+  baseStyles.aiDraw,
   baseStyles.textGlow,
   baseStyles.headings,
   baseStyles.h1,
@@ -73,16 +76,15 @@ criticalStyleSheet.add(
   baseStyles.button,
   baseStyles.clearFix,
   baseStyles.verticalRhythmReset,
-  baseStyles.verticalRhythm
+  baseStyles.verticalRhythm,
+  expandedStyles
 );
 
 const logicalCssUrlPath = isProduction && process.env.LOGICAL_CSS_URL_PATH ? process.env.LOGICAL_CSS_URL_PATH : './'
 
 const markup = [
-  CONTAINER_START,
-  '<style>',
-  criticalStyleSheet.toString(),
-  '</style>',
+  containerStart({ head: `<style>${ criticalStyleSheet.toString() }</style>` }),
+
 
   `<h1>COPR</h1>`,
   `<h2>CSS Operation Plan Response</h2>`,
@@ -94,14 +96,16 @@ const markup = [
   boardMap(aiCheckbox).join(''),
   boardMap(aiLabel).join(''),
   boardMap(boardSquare).join(''),
-  `<div id="aiWin"><div>COPR wins. The only winning move is not to play.</div><a class="button" href=".">Restart</a></div>`,
-  `<div id="aiDraw"><div>Draw. The only winning move is not to play.</div><a class="button" href=".">Restart</a></div>`,
+  `<div id="aiWin"><div>COPR wins. The only winning move is not to play.</div>${ playAgain }${ starOnGithub }</div>`,
+  `<div id="aiDraw"><div>Stalemate.</div>${ playAgain }${ starOnGithub }</div>`,
   `<div class="clear-fix"></div>`,
   `</div>`,
 
   `<a class="button" href=".">Restart</a>`,
   `<link rel="stylesheet" type="text/css" href="${ logicalCssUrlPath }logical.css" />`,
-  CONTAINER_END
+  `<div class="top-sticky">${ starOnGithub }</div>`,
+
+  containerEnd()
 ];
 
 saveToFile(markup.join(''), './dist/index.html', false);

@@ -22,7 +22,7 @@ class StyleSheet {
 
   add(...styles) {
     styles.forEach(style => {
-      if (!(style instanceof Style)) throw new TypeError(`Can only add styles of instance Style, not ${typeof style}`);
+      if (!(style instanceof Style || style instanceof MediaQuery)) throw new TypeError(`Can only add styles of instance Style, not ${typeof style}`);
     });
     this.styles = this.styles.concat(styles);
 
@@ -33,6 +33,28 @@ class StyleSheet {
     return this.styles.map(style => style.toString()).join('');
   }
 }
+
+class MediaQuery {
+  constructor(mediaQuery) {
+    this.query = mediaQuery;
+    this.styles = [];
+  }
+
+  add(...styles) {
+    styles.forEach(style => {
+      if (!(style instanceof Style)) throw new TypeError(`Can only add styles of instance Style, not ${typeof style}`);
+    });
+    this.styles = this.styles.concat(styles);
+
+    return this;
+  }
+
+  toString() {
+    return `${this.query} { ${ this.styles.map(style => style.toString()).join('') } }`;
+  }
+}
+
+const expandedStyles = new MediaQuery('@media screen and (min-width: 550px)');
 
 const style = {};
 
@@ -51,12 +73,22 @@ style.boardSquare = new Style(
   `.${BOARD_ELEMENT.SQUARE}`,
   {
     'float': 'left',
-    'width': '125px',
-    'height': '125px',
+    'width': '75px',
+    'height': '75px',
     'position': 'relative',
     'max-width': '30%'
   }
 );
+
+style.tabletBoardSquare = new Style(
+  `.${BOARD_ELEMENT.SQUARE}`,
+  {
+    'width': '125px',
+    'height': '125px'
+  }
+);
+
+expandedStyles.add(style.tabletBoardSquare);
 
 style.horizontalGrid = new Style(
   `.${BOARD_ELEMENT.SQUARE}:nth-of-type(1),` +
@@ -66,7 +98,7 @@ style.horizontalGrid = new Style(
   `.${BOARD_ELEMENT.SQUARE}:nth-of-type(5),` +
   `.${BOARD_ELEMENT.SQUARE}:nth-of-type(6)`,
   {
-    'border-bottom': '10px solid #94b7ed'
+    'border-bottom': '5px solid #94b7ed'
   }
 );
 
@@ -78,10 +110,35 @@ style.verticalGrid = new Style(
   `.${BOARD_ELEMENT.SQUARE}:nth-of-type(7),` +
   `.${BOARD_ELEMENT.SQUARE}:nth-of-type(8)`,
   {
-    'border-right': '10px solid #94b7ed'
+    'border-right': '5px solid #94b7ed'
   }
 );
 
+style.tabletHorizontalGrid = new Style(
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(1),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(2),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(3),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(4),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(5),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(6)`,
+  {
+    'border-bottom': '10px solid #94b7ed'
+  }
+);
+expandedStyles.add(style.tabletHorizontalGrid);
+
+style.tabletVerticalGrid = new Style(
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(1),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(2),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(4),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(5),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(7),` +
+  `.${BOARD_ELEMENT.SQUARE}:nth-of-type(8)`,
+  {
+    'border-right': '10px solid #94b7ed'
+  }
+);
+expandedStyles.add(style.tabletVerticalGrid);
 
 style.boardSquareClear = new Style(
   // clear float for every third piece
@@ -109,31 +166,105 @@ style.hideAllCheckboxes = new Style(
   'input[type=checkbox]', { 'display': 'none' }
 );
 
-style.hideAiLabels = new Style(
+style.aiChoice = new Style(
 `.${PLAYER.AI_STRING}-${BOARD_ELEMENT.LABEL}`, {
+  // ai choice is hidden by default
   'opacity': '0',
-  'display': 'none'
+  'display': 'none',
+
+  'padding-top': 'calc(50% - 1em)',
+  'box-sizing': 'border-box',
+  'padding-left': '1em',
+  'position': 'fixed',
+  'width': '100%',
+  'height': '100%',
+  'background': 'rgba(0, 0, 0, 0.97)',
+  'top': '0',
+  'bottom': '0',
+  'left': '0',
+  'right': '0',
+  'margin': '0',
+  'cursor': 'pointer',
+  // z-index to appear relative board squares
+  'z-index': '1',
 });
 
-style.hideAiWinContainer = new Style('#aiWin', {
-  display: 'none'
+style.tabletAiChoice = new Style(
+  `.${PLAYER.AI_STRING}-${BOARD_ELEMENT.LABEL}`, {
+    // confined to the boundaries of the board
+    // by its relative position
+    'position': 'absolute'
+  }
+);
+expandedStyles.add(style.tabletAiChoice);
+
+style.aiWin = new Style('#aiWin', {
+  // hidden by default
+  'display': 'none',
+
+  'font-size': '1.5rem',
+  'padding': '1em',
+  'box-sizing': 'border-box',
+  'position': 'fixed',
+  'width': '100%',
+  'height': '100%',
+  'background': 'rgba(0, 0, 0, 0.85)',
+  'top': '0',
+  'bottom': '0',
+  'left': '0',
+  'right': '0',
+  'margin': '0',
+  'cursor': 'pointer',
+  // z-index to appear relative board squares
+  'z-index': '1',
 });
 
-style.hideAiDrawContainer = new Style('#aiDraw', {
-  display: 'none'
+style.tabletAiWin = new Style('#aiWin', {
+  'position': 'absolute'
 });
+
+style.aiDraw = new Style('#aiDraw', {
+  // hidden by default
+  display: 'none',
+
+  'font-size': '1.5rem',
+  'padding': '1em',
+  'box-sizing': 'border-box',
+  'position': 'fixed',
+  'width': '100%',
+  'height': '100%',
+  'background': 'rgba(0, 0, 0, 0.85)',
+  'top': '0',
+  'bottom': '0',
+  'left': '0',
+  'right': '0',
+  'margin': '0',
+  'cursor': 'pointer',
+  // z-index to appear relative board squares
+  'z-index': '1',
+});
+
+style.tabletAiDraw = new Style('#aiDraw', {
+  position: 'absolute'
+});
+expandedStyles.add(style.aiDraw);
 
 style.window = new Style('.window', {
   'border': '0.25rem solid #fff',
-  'width': '650px',
   'max-width': '100%',
   'box-sizing': 'border-box',
+  'padding': '15px'
+});
+
+style.centeredWindow = new Style('.window', {
   'padding': '25px',
   'position': 'absolute',
   'top': '50%',
   'left': '50%',
+  'width': '650px',
   'transform': 'translate(-50%, -50%)'
 });
+expandedStyles.add(style.centeredWindow);
 
 style.textGlow = new Style('*', {
   'text-shadow': '0px 0px 13px rgba(255, 255, 255, 0.5)'
@@ -160,7 +291,7 @@ style.button = new Style('.button', {
   'text-decoration': 'none',
   'border': '1px solid white',
   'padding': '0.25rem 0.75rem',
-  'font-size': '1rem'
+  'font-size': '0.75rem'
 });
 
 style.clearFix = new Style('.clear-fix', {
@@ -196,6 +327,15 @@ style.verticalRhythmReset = new Style(
 style.verticalRhythm = new Style('* + *', {
   'margin-top': '0.5em'
 });
+
+style.topSticky = new Style('.top-sticky', {
+  'position': 'fixed',
+  'top': '25px',
+  'right': '25px',
+  'margin-top': '0'
+})
+
+expandedStyles.add(style.topSticky);
 
 const mapBoardToSelector = (board, forSymbol, prefix) => {
   const selector = i =>  `#${ fullId(prefix, BOARD_ELEMENT.CHECKBOX, i) }`;
@@ -269,22 +409,6 @@ const computedStyles = {
     return new Style(selector, {
       'opacity': '1',
       'display': 'block',
-
-      'padding-top': 'calc(50% - 1em)',
-      'box-sizing': 'border-box',
-      'padding-left': '1em',
-      'position': 'absolute',
-      'width': '100%',
-      'height': '100%',
-      'background': 'rgba(0, 0, 0, 0.97)',
-      'top': '0',
-      'bottom': '0',
-      'left': '0',
-      'right': '0',
-      'margin': '0',
-      'cursor': 'pointer',
-      // z-index to appear relative board squares
-      'z-index': '1',
     });
   },
 
@@ -301,22 +425,6 @@ const computedStyles = {
 
     return new Style(selector, {
       display: 'block',
-
-      'font-size': '1.5rem',
-      'padding': '1em',
-      'box-sizing': 'border-box',
-      'position': 'absolute',
-      'width': '100%',
-      'height': '100%',
-      'background': 'rgba(0, 0, 0, 0.85)',
-      'top': '0',
-      'bottom': '0',
-      'left': '0',
-      'right': '0',
-      'margin': '0',
-      'cursor': 'pointer',
-      // z-index to appear relative board squares
-      'z-index': '1',
     });
   },
 
@@ -332,23 +440,7 @@ const computedStyles = {
       '#aiDraw';
 
     return new Style(selector, {
-      display: 'block',
-
-      'font-size': '1.5rem',
-      'padding': '1em',
-      'box-sizing': 'border-box',
-      'position': 'absolute',
-      'width': '100%',
-      'height': '100%',
-      'background': 'rgba(0, 0, 0, 0.85)',
-      'top': '0',
-      'bottom': '0',
-      'left': '0',
-      'right': '0',
-      'margin': '0',
-      'cursor': 'pointer',
-      // z-index to appear relative board squares
-      'z-index': '1',
+      display: 'block'
     });
   },
 };
@@ -357,5 +449,6 @@ module.exports = {
   Style,
   StyleSheet,
   baseStyles: style,
-  computedStyles
+  computedStyles,
+  expandedStyles
 };
