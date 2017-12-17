@@ -6,10 +6,11 @@ function recommendBestMove(board, previousPlayer, nextPlayer) {
   const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
 
   // with an empty board, choose the middle
-  if (emptySpots.length === 9) {
+  if (emptySpots.length === board.toArray().length) {
     return 4;
   }
 
+  // find the best move based on scores of available spots
   const bestMove = emptySpots.reduce((bestMove, emptySpot) => {
     const score = scoreBoard(board.makeMove(emptySpot, nextPlayer.symbol), nextPlayer, nextPlayer, previousPlayer);
 
@@ -19,9 +20,18 @@ function recommendBestMove(board, previousPlayer, nextPlayer) {
     };
 
     return bestMove.score > move.score ? bestMove : move;
-  }, {});
+  }, {
+    // set score to ultimately low number so any any
+    // comparison score is greater
+    score: Number.NEGATIVE_INFINITY
+  });
 
-  return bestMove.spot || null;
+  // should have a move with a numbered spot index on the board
+  if (typeof bestMove.spot !== 'number') {
+    throw new Error('Unable to determine a recommended best move for board');
+  }
+
+  return bestMove.spot;
 }
 
 module.exports = memoizeBoardWithPlayers(recommendBestMove);
