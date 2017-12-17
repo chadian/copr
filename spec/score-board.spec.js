@@ -14,7 +14,7 @@ describe("score-board", () => {
       O , _ , X ,
     ]);
 
-    expect(scoreBoard(board, playerX, playerX, playerO)).toBe(1);
+    expect(scoreBoard(board, playerX, playerO, playerX)).toBe(1);
   });
 
   it("scores a board resulting in a loss", () => {
@@ -24,7 +24,7 @@ describe("score-board", () => {
       O, _, X,
     ]);
 
-    expect(scoreBoard(board, playerO, playerX, playerO)).toBe(-1);
+    expect(scoreBoard(board, playerO, playerO, playerX)).toBe(-1);
   });
 
   it("scores a board resulting in a draw", () => {
