@@ -15,10 +15,21 @@ jobs:
       script:
         - npm run build
       deploy:
-        node_js: "6"
-        provider: pages
-        local_dir: dist
-        skip_cleanup: true
-        github_token: $GITHUB_TOKEN
-        on:
-          branch: master
+        - provider: pages
+          node_js: "8"
+          local_dir: dist
+          skip_cleanup: true
+          github_token: $GITHUB_TOKEN
+          on:
+            branch: master
+        - provider: gcs
+          node_js: "8"
+          local_dir: dist
+          skip_cleanup: true
+          access_key_id: $GCS_ACCESS_ID
+          secret_access_key: $GCS_SECRET_KEY
+          bucket: $GCS_BUCKET
+          detect_encoding: true
+          acl: public-read
+          on:
+            branch: master
