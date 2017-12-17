@@ -65,12 +65,24 @@ describe("recommend-best-move", () => {
 
     it("will choose to block a player", () => {
       const board = new Board([
-        'O', '_', '_',
-        'X', 'X', '_',
-        '_', '_', '_',
+        O, _, _,
+        X, X, _,
+        _, _, _,
       ]);
 
       expect(recommendBestMove(board, playerX, playerO)).toBe(position.MIDDLE_RIGHT);
+    });
+  });
+
+  describe("handles example boards", () => {
+    it("🐸", () => {
+      const board = new Board([
+        _, X, X,
+        _, O, _,
+        _, _, _,
+      ]);
+
+      expect(recommendBestMove(board, playerX, playerO)).toBe(position.TOP_LEFT);
     });
   });
 
