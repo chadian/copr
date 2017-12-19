@@ -10,6 +10,8 @@
   "author": "Chad Carbert",
   "license": "MIT",
   "dependencies": {
+    "cssnano": "^3.10.0",
+    "postcss": "^6.0.14",
     "proxyquire": "^1.8.0",
     "ramda": "^0.25.0"
   },
