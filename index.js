@@ -2,7 +2,7 @@ const Board = require('./board');
 const Player = require('./player');
 const recommendationHash = require('./utils/recommendations-hash');
 const { BOARD_INDEXES } = require('./utils/markup/constants');
-const { saveToFile } = require('./utils/files');
+const { saveToFile, processCss } = require('./utils/compile');
 const {
   containerStart,
   containerEnd,
@@ -22,6 +22,8 @@ const {
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const isProduction = NODE_ENV === 'production';
+const shouldCompressStyles = isProduction && process.env.LOGICAL_CSS_URL_PATH;
+const logicalCssUrlPath = isProduction && process.env.LOGICAL_CSS_URL_PATH ? process.env.LOGICAL_CSS_URL_PATH : './'
 
 const hash = recommendationHash(Board.generateEmptyBoard(), new Player('O'), new Player('X'));
 const boardMap = (fn) => BOARD_INDEXES.map(fn);
@@ -80,11 +82,9 @@ criticalStyleSheet.add(
   expandedStyles
 );
 
-const logicalCssUrlPath = isProduction && process.env.LOGICAL_CSS_URL_PATH ? process.env.LOGICAL_CSS_URL_PATH : './'
 
 const markup = [
   containerStart({ head: `<style>${ criticalStyleSheet.toString() }</style>` }),
-
 
   `<h1>COPR</h1>`,
   `<h2>CSS Operation Plan Response</h2>`,
@@ -109,5 +109,5 @@ const markup = [
 ];
 
 saveToFile(markup.join(''), './dist/index.html', false);
-const useGzipForExternalCss = isProduction && process.env.LOGICAL_CSS_URL_PATH;
-saveToFile(logicalStyleSheet.toString(), './dist/logical.css', useGzipForExternalCss);
+processCss(logicalStyleSheet.toString(), shouldCompressStyles)
+  .then(({ css }) => saveToFile(css, './dist/logical.css', shouldCompressStyles));

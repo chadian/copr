@@ -2,6 +2,8 @@ const { Readable, PassThrough } = require('stream');
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
+const postcss = require('postcss');
+const cssnano = require('cssnano');
 
 const hasAccess = (dir) => {
   try {
@@ -12,7 +14,13 @@ const hasAccess = (dir) => {
   }
 };
 
-function saveToFile(string, filePath, gzip=false) {
+function processCss(rawCssString, compress=false) {
+  const cssMinifier = postcss([ cssnano ]).process(rawCssString);
+  const processedCss = compress ? cssMinifier : Promise.resolve({ css: rawCssString });
+  return processedCss;
+};
+
+function saveToFile(string, filePath, gzip = false) {
   const dirPath = path.dirname(filePath);
   if (!hasAccess(dirPath)) fs.mkdirSync(dirPath);
 
@@ -32,4 +40,4 @@ function saveToFile(string, filePath, gzip=false) {
     .on('finish', () => console.log(`Finished writing ${filePath}`));
 };
 
-module.exports = { saveToFile }
+module.exports = { saveToFile, processCss }
