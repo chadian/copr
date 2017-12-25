@@ -26,7 +26,9 @@
     "jasmine": "^2.8.0",
     "pre-commit": "^1.2.2",
     "prettier-eslint-cli": "^4.7.0",
-    "proxyquire": "^1.8.0"
+    "proxyquire": "^1.8.0",
+    "puppeteer": "^0.13.0",
+    "jasmine": "^2.8.0"
   },
   "pre-commit": ["eslint-check-staged"]
 }
