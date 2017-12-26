@@ -28,6 +28,9 @@
     "prettier-eslint-cli": "^4.7.0",
     "proxyquire": "^1.8.0",
     "puppeteer": "^0.13.0",
+    "jasmine": "^2.8.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "jasmine": "^2.8.0"
   },
   "pre-commit": ["eslint-check-staged"]
