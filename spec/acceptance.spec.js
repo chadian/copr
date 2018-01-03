@@ -46,9 +46,10 @@ describe("Acceptance", () => {
     return Promise.all([Promise.resolve(browser), serverStart]);
   });
 
-  afterAll(() => {
-    browser.close();
+  afterAll(async (done) => {
+    await browser.close();
     server.stop();
+    done();
   });
 
   it("sees a rendered board", async (done) => {
