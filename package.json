@@ -8,7 +8,10 @@
   "scripts": {
     "build": "node index",
     "test": "jasmine",
-    "prettier-git-staged": "git diff --name-only --cached | grep .*\\.js | xargs prettier --write | sed -E 's/(.*.(js|json)).*/\\1/' | xargs git add"
+    "prettier-git-staged": "git diff --name-only --cached | grep .*\\.js | xargs prettier --write | sed -E 's/(.*.(js|json)).*/\\1/' | xargs git add",
+    "eslint-git-staged": "./scripts/eslint-staged.sh",
+    "eslint-check": "eslint .",
+    "eslint-fix-all": "eslint --fix ."
   },
   "dependencies": {
     "cssnano": "^3.10.0",
@@ -24,6 +27,7 @@
     "proxyquire": "^1.8.0"
   },
   "pre-commit": [
-    "prettier-git-staged"
+    "prettier-git-staged",
+    "eslint-git-staged"
   ]
 }
