@@ -1,6 +1,5 @@
 const Board = require('../board');
 const recommendationHash = require('../utils/recommendations-hash');
-const Player = require('../player');
 const { playerX, playerO, _ } = require('./stubs/player');
 
 const X = playerX.symbol;

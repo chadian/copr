@@ -1,7 +1,6 @@
 const Board = require('../board');
 const scoreBoard = require('../utils/score-board');
 const { playerX, playerO, _ } = require('./stubs/player');
-const position = require('./stubs/position');
 
 const X = playerX.symbol;
 const O = playerO.symbol;

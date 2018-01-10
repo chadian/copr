@@ -1,5 +1,3 @@
-const Board = require('../board');
-const Player = require('../player');
 const winnerOfBoard = require('./winner-of-board');
 const buildMoveTree = require('./build-move-tree');
 
@@ -15,7 +13,7 @@ function scoreBoard(board, favouredPlayer, previousPlayer, nextPlayer) {
 }
 
 function recursiveScore(moveNode, favouredPlayer) {
-    const { board, children, previousPlayer, nextPlayer } = moveNode;
+    const { board, children, nextPlayer } = moveNode;
 
     const winner = winnerOfBoard(board);
     if (winner !== null) {

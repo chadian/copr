@@ -1,7 +1,6 @@
 const buildMoveTree = require('./build-move-tree');
 const recommendBestMove = require('./recommend-best-move');
 const winnerOfBoard = require('./winner-of-board');
-const Board = require('../board');
 
 module.exports = function recommendationHash(board, player, opponent) {
     const hash = {};

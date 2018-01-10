@@ -141,8 +141,8 @@ describe('recommend-best-move', () => {
 
             const A = '😀';
             const B = '👾';
-            playerA = new Player(A);
-            playerB = new Player(B);
+            const playerA = new Player(A);
+            const playerB = new Player(B);
             const abBoardArray = board
                 .toArray()
                 .join(',')

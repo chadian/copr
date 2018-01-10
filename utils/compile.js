@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const { Readable, PassThrough } = require('stream');
 const fs = require('fs');
 const path = require('path');

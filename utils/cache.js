@@ -1,4 +1,4 @@
-const { memoizeWith, nAry } = require('ramda');
+const { memoizeWith } = require('ramda');
 
 const cacheKeyGenerator = (board, playerSymbol, opponentSymbol) => {
     const PLAYER_CACHE_CHAR = 'X';
