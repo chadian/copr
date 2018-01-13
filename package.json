@@ -9,17 +9,19 @@
     "build": "node index",
     "test": "jasmine",
     "format": "prettier-eslint --list-different --write \"**/*.js\"",
-    "format-fix-staged":
-      "git diff --name-only --cached | grep .*\\.js | xargs prettier-eslint --write | sed -E 's/(.*.(js|json)).*/\\1/' | xargs git add",
+    "format-fix-staged": "git diff --name-only --cached | grep .*\\.js | xargs prettier-eslint --write | sed -E 's/(.*.(js|json)).*/\\1/' | xargs git add",
     "eslint": "node_modules/.bin/eslint .",
     "eslint-check-staged": "./scripts/eslint-staged.sh"
   },
   "dependencies": {
     "cssnano": "^3.10.0",
     "postcss": "^6.0.14",
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "static-server": "^3.0.0"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "eslint": "^4.15.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-jasmine": "^2.9.1",
@@ -27,11 +29,9 @@
     "pre-commit": "^1.2.2",
     "prettier-eslint-cli": "^4.7.0",
     "proxyquire": "^1.8.0",
-    "puppeteer": "^0.13.0",
-    "jasmine": "^2.8.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
-    "jasmine": "^2.8.0"
+    "puppeteer": "^0.13.0"
   },
-  "pre-commit": ["eslint-check-staged"]
+  "pre-commit": [
+    "eslint-check-staged"
+  ]
 }
