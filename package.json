@@ -3,19 +3,30 @@
   "version": "1.0.0",
   "description": "CSS Operation Plan Response, css tic tac toe AI",
   "main": "index.js",
-  "scripts": {
-    "build": "node index",
-    "test": "jasmine"
-  },
   "author": "Chad Carbert",
   "license": "MIT",
+  "scripts": {
+    "build": "node index",
+    "test": "jasmine",
+    "format": "prettier-eslint --list-different --write \"**/*.js\"",
+    "format-fix-staged":
+      "git diff --name-only --cached | grep .*\\.js | xargs prettier-eslint --write | sed -E 's/(.*.(js|json)).*/\\1/' | xargs git add",
+    "eslint": "node_modules/.bin/eslint .",
+    "eslint-check-staged": "./scripts/eslint-staged.sh"
+  },
   "dependencies": {
     "cssnano": "^3.10.0",
     "postcss": "^6.0.14",
-    "proxyquire": "^1.8.0",
     "ramda": "^0.25.0"
   },
   "devDependencies": {
-    "jasmine": "^2.8.0"
-  }
+    "eslint": "^4.15.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-jasmine": "^2.9.1",
+    "jasmine": "^2.8.0",
+    "pre-commit": "^1.2.2",
+    "prettier-eslint-cli": "^4.7.0",
+    "proxyquire": "^1.8.0"
+  },
+  "pre-commit": ["eslint-check-staged"]
 }

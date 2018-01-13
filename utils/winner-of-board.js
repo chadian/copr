@@ -2,21 +2,17 @@ const Board = require('../board');
 const { uniq } = require('ramda');
 
 function winnerOfBoard(board) {
-  let winners = Board.WINNING_LINES
-    .map(line => {
-      const symbol = board.symbolAtSpot(line[0]);
+  let winners = Board.WINNING_LINES.map(line => {
+    const symbol = board.symbolAtSpot(line[0]);
 
-      if (symbol === Board.EMPTY_SPOT_SYMBOL) {
-        return null;
-      }
+    if (symbol === Board.EMPTY_SPOT_SYMBOL) {
+      return null;
+    }
 
-      const isWinner = line.every(
-        spot => board.symbolAtSpot(spot) === symbol
-      );
+    const isWinner = line.every(spot => board.symbolAtSpot(spot) === symbol);
 
-      return isWinner ? symbol : null;
-    })
-    .filter(winner => winner !== null);
+    return isWinner ? symbol : null;
+  }).filter(winner => winner !== null);
 
   winners = uniq(winners);
 
