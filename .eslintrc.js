@@ -1,19 +1,22 @@
 module.exports = {
-  plugins: ['jasmine'],
+  plugins: ["jasmine"],
   env: {
     es6: true,
     node: true,
     jasmine: true
   },
+  "parserOptions": {
+      "ecmaVersion": 2017
+  },
   extends: [
-    'eslint:recommended',
+    "eslint:recommended",
     // prettier comes last so it has final say
-    'prettier'
+    "prettier"
   ],
   rules: {
-    indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always']
+    indent: ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    quotes: ["error", "single"],
+    semi: ["error", "always"]
   }
 };
