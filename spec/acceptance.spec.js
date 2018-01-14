@@ -40,8 +40,8 @@ describe('Acceptance', () => {
     });
 
     const serverStart = new Promise(resolve => server.start(resolve));
-    browser = await puppeteer.launch({ headless: false, slowMo: 50 });
-    // browser = await puppeteer.launch();
+    browser = await puppeteer.launch();
+
     return Promise.all([Promise.resolve(browser), serverStart]);
   });
 
