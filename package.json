@@ -16,8 +16,7 @@
   "dependencies": {
     "cssnano": "^3.10.0",
     "postcss": "^6.0.14",
-    "ramda": "^0.25.0",
-    "static-server": "^3.0.0"
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
@@ -29,7 +28,8 @@
     "pre-commit": "^1.2.2",
     "prettier-eslint-cli": "^4.7.0",
     "proxyquire": "^1.8.0",
-    "puppeteer": "^0.13.0"
+    "puppeteer": "^0.13.0",
+    "static-server": "^3.0.0"
   },
   "pre-commit": [
     "eslint-check-staged"
