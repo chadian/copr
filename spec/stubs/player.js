@@ -1,5 +1,5 @@
-const Board = require('../../board');
-const Player = require('../../player');
+const Board = require('../../src/board');
+const Player = require('../../src/player');
 
 const X = 'X';
 const O = 'O';

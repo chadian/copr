@@ -1,5 +1,5 @@
-const Board = require('../board');
-const winnerOfBoard = require('../utils/winner-of-board');
+const Board = require('../src/board');
+const winnerOfBoard = require('../src/utils/winner-of-board');
 const { X, O, _ } = require('./stubs/player');
 
 describe('winner-of-board', () => {

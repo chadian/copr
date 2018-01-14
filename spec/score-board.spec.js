@@ -1,5 +1,5 @@
-const Board = require('../board');
-const scoreBoard = require('../utils/score-board');
+const Board = require('../src/board');
+const scoreBoard = require('../src/utils/score-board');
 const { playerX, playerO, _ } = require('./stubs/player');
 
 const X = playerX.symbol;

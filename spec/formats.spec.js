@@ -1,4 +1,4 @@
-const { baseFormat, classFormat, fullId } = require('../utils/markup/formats');
+const { baseFormat, classFormat, fullId } = require('../src/utils/markup/formats');
 
 describe('formats', () => {
   describe('baseFormat', () => {

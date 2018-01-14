@@ -1,8 +1,8 @@
 const proxyquire = require('proxyquire');
 
-const Board = require('../board');
-const Player = require('../player');
-const recommendBestMove = require('../utils/recommend-best-move');
+const Board = require('../src/board');
+const Player = require('../src/player');
+const recommendBestMove = require('../src/utils/recommend-best-move');
 const { playerX, playerO, _ } = require('./stubs/player');
 const position = require('./stubs/position');
 
@@ -77,7 +77,7 @@ describe('recommend-best-move', () => {
     let scoreBoardSpy;
 
     beforeEach(() => {
-      const scoreBoard = require('../utils/score-board');
+      const scoreBoard = require('../src/utils/score-board');
       // just re-hooking up the same module to itself but
       // attaching the `scoreBoardSpy` first
       const moduleStub = {
@@ -86,7 +86,7 @@ describe('recommend-best-move', () => {
 
       scoreBoardSpy = spyOn(moduleStub, './score-board').and.callThrough();
       spiedRecommendBestMove = proxyquire(
-        '../utils/recommend-best-move',
+        '../src/utils/recommend-best-move',
         moduleStub
       );
     });
