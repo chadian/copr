@@ -1,14 +1,16 @@
 /*global window*/
 
-const { BOARD_ELEMENT, PLAYER } = require('../utils/markup/constants');
+const { BOARD_ELEMENT, PLAYER } = require('../src/utils/markup/constants');
 const position = require('./stubs/position');
 const { uniq } = require('ramda');
-const { classFormat, fullId } = require('../utils/markup/formats');
+const { classFormat, fullId } = require('../src/utils/markup/formats');
 const puppeteer = require('puppeteer');
 const StaticServer = require('static-server');
 const path = require('path');
 
 const dist = path.resolve(__dirname, '../dist/');
+const STATIC_SERVER_PORT = 5000;
+const STATIC_SERVER_URL = `http://localhost:${ STATIC_SERVER_PORT }`;
 
 let server;
 let browser;
@@ -34,15 +36,12 @@ const computedStyle = page => (selector, styleProp) =>
 
 describe('Acceptance', () => {
   beforeAll(async () => {
-    server = new StaticServer({
-      port: 5000,
-      rootPath: dist
-    });
+    server = new StaticServer({ port: STATIC_SERVER_PORT, rootPath: dist });
 
     const serverStart = new Promise(resolve => server.start(resolve));
     browser = await puppeteer.launch();
 
-    return Promise.all([Promise.resolve(browser), serverStart]);
+    return Promise.all([browser, serverStart]);
   });
 
   afterAll(async done => {
@@ -53,7 +52,7 @@ describe('Acceptance', () => {
 
   it('sees a rendered board', async done => {
     const page = await browser.newPage();
-    await page.goto('http://localhost:5000');
+    await page.goto(STATIC_SERVER_URL);
     const styles = computedStyle(page);
 
     const boardSquareSelector = classFormat(null, `.${BOARD_ELEMENT.SQUARE}`);
@@ -68,7 +67,7 @@ describe('Acceptance', () => {
 
   it('plays the game to a stalemate', async done => {
     const page = await browser.newPage();
-    await page.goto('http://localhost:5000');
+    await page.goto(STATIC_SERVER_URL);
     const styles = computedStyle(page);
 
     const humanSpotSelector = index =>
