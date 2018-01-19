@@ -1,6 +1,6 @@
-const Board = require('../src/board');
-const winnerOfBoard = require('../src/utils/winner-of-board');
-const { X, O, _ } = require('./stubs/player');
+import Board from '../src/board';
+import winnerOfBoard from '../src/utils/winner-of-board';
+import { X, O, _ } from './stubs/player';
 
 describe('winner-of-board', () => {
   describe('returns the winning character of a board', () => {

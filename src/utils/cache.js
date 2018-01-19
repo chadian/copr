@@ -1,4 +1,4 @@
-const { memoizeWith } = require('ramda');
+import { memoizeWith } from 'ramda';
 
 const cacheKeyGenerator = (board, playerSymbol, opponentSymbol) => {
   const PLAYER_CACHE_CHAR = 'X';
@@ -22,7 +22,4 @@ const memoizeBoardWithPlayers = fn =>
     fn
   );
 
-module.exports = {
-  cacheKeyGenerator,
-  memoizeBoardWithPlayers
-};
+export { cacheKeyGenerator, memoizeBoardWithPlayers };

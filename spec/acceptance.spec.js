@@ -1,16 +1,16 @@
 /*global window*/
 
-const { BOARD_ELEMENT, PLAYER } = require('../src/utils/markup/constants');
-const position = require('./stubs/position');
-const { uniq } = require('ramda');
-const { classFormat, fullId } = require('../src/utils/markup/formats');
-const puppeteer = require('puppeteer');
-const StaticServer = require('static-server');
-const path = require('path');
+import { BOARD_ELEMENT, PLAYER } from '../src/utils/markup/constants';
+import * as position from './stubs/position';
+import { uniq } from 'ramda';
+import { classFormat, fullId } from '../src/utils/markup/formats';
+import puppeteer from 'puppeteer';
+import StaticServer from 'static-server';
+import path from 'path';
 
 const dist = path.resolve(__dirname, '../dist/');
 const STATIC_SERVER_PORT = 5000;
-const STATIC_SERVER_URL = `http://localhost:${ STATIC_SERVER_PORT }`;
+const STATIC_SERVER_URL = `http://localhost:${STATIC_SERVER_PORT}`;
 
 let server;
 let browser;

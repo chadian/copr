@@ -1,5 +1,5 @@
-const Board = require('../board');
-const { uniq } = require('ramda');
+import Board from '../board';
+import { uniq } from 'ramda';
 
 function winnerOfBoard(board) {
   let winners = Board.WINNING_LINES.map(line => {
@@ -27,4 +27,4 @@ function winnerOfBoard(board) {
   return winners[0];
 }
 
-module.exports = winnerOfBoard;
+export default winnerOfBoard;

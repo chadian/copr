@@ -1,11 +1,8 @@
-const Board = require('../../src/board');
-const Player = require('../../src/player');
+import Board from '../../src/board';
+import Player from '../../src/player';
 
-const X = 'X';
-const O = 'O';
-
-exports._ = Board.EMPTY_SPOT_SYMBOL;
-exports.X = X;
-exports.O = 'O';
-exports.playerX = new Player(X);
-exports.playerO = new Player(O);
+export const _ = Board.EMPTY_SPOT_SYMBOL;
+export const X = 'X';
+export const O = 'O';
+export const playerX = new Player(X);
+export const playerO = new Player(O);
