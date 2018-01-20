@@ -2,14 +2,14 @@
   "name": "copr",
   "version": "1.0.0",
   "description": "CSS Operation Plan Response, css tic tac toe AI",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "Chad Carbert",
   "license": "MIT",
   "scripts": {
-    "build": "node index",
     "test": "jasmine",
+    "build": "babel-node src",
     "format": "prettier-eslint --list-different --write \"**/*.js\"",
-    "format-fix-staged": "git diff --name-only --cached | grep .*\\.js | xargs prettier-eslint --write | sed -E 's/(.*.(js|json)).*/\\1/' | xargs git add",
+    "format-fix-staged": "git diff --name-only --cached | grep .*\\.js | xargs prettier-eslint --write",
     "eslint": "node_modules/.bin/eslint .",
     "eslint-check-staged": "./scripts/eslint-staged.sh"
   },
@@ -19,6 +19,10 @@
     "ramda": "^0.25.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-rewire": "^1.1.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "eslint": "^4.15.0",
