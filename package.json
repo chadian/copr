@@ -6,8 +6,8 @@
   "author": "Chad Carbert",
   "license": "MIT",
   "scripts": {
-    "test": "jasmine",
     "build": "babel-node src",
+    "test": "babel-node spec/support/run.js",
     "format": "prettier-eslint --list-different --write \"**/*.js\"",
     "format-fix-staged": "git diff --name-only --cached | grep .*\\.js | xargs prettier-eslint --write",
     "eslint": "node_modules/.bin/eslint .",
