@@ -20,4 +20,4 @@ const classFormat = (prefix, type, pieceIndex) => {
   return classStrings.join(' ');
 };
 
-module.exports = { baseFormat, fullId, classFormat };
+export { baseFormat, fullId, classFormat };

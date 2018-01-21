@@ -1,5 +1,5 @@
-const { fullId, classFormat } = require('./formats');
-const { BOARD_ELEMENT, PLAYER } = require('./constants');
+import { fullId, classFormat } from './formats';
+import { BOARD_ELEMENT, PLAYER } from './constants';
 
 const checkbox = (prefix, index) => {
   return `<input
@@ -67,7 +67,7 @@ const containerStart = ({ head }) => `
 const containerEnd = () =>
   '<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet"></div></body></html>';
 
-module.exports = {
+export {
   humanCheckbox,
   aiCheckbox,
   aiLabel,

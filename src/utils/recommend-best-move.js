@@ -1,6 +1,6 @@
-const Board = require('../board');
-const scoreBoard = require('./score-board');
-const { memoizeBoardWithPlayers } = require('./cache');
+import Board from '../board';
+import scoreBoard from './score-board';
+import { memoizeBoardWithPlayers } from './cache';
 
 function recommendBestMove(board, previousPlayer, nextPlayer) {
   const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
@@ -42,4 +42,4 @@ function recommendBestMove(board, previousPlayer, nextPlayer) {
   return bestMove.spot;
 }
 
-module.exports = memoizeBoardWithPlayers(recommendBestMove);
+export default memoizeBoardWithPlayers(recommendBestMove);

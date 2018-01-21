@@ -1,5 +1,5 @@
-const { BOARD_ELEMENT, PLAYER } = require('./constants');
-const { fullId } = require('./formats');
+import { BOARD_ELEMENT, PLAYER } from './constants';
+import { fullId } from './formats';
 
 class Style {
   constructor(selectors, style) {
@@ -471,10 +471,10 @@ const computedStyles = {
   }
 };
 
-module.exports = {
+export {
   Style,
   StyleSheet,
-  baseStyles: style,
+  style as baseStyles,
   computedStyles,
   expandedStyles
 };

@@ -1,6 +1,6 @@
-const Board = require('../src/board');
-const scoreBoard = require('../src/utils/score-board');
-const { playerX, playerO, _ } = require('./stubs/player');
+import Board from '../src/board';
+import scoreBoard from '../src/utils/score-board';
+import { playerX, playerO, _ } from './stubs/player';
 
 const X = playerX.symbol;
 const O = playerO.symbol;

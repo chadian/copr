@@ -1,10 +1,11 @@
 /* eslint no-console: 0 */
-const { Readable, PassThrough } = require('stream');
-const fs = require('fs');
-const path = require('path');
-const zlib = require('zlib');
-const postcss = require('postcss');
-const cssnano = require('cssnano');
+import { Readable, PassThrough } from 'stream';
+
+import fs from 'fs';
+import path from 'path';
+import zlib from 'zlib';
+import postcss from 'postcss';
+import cssnano from 'cssnano';
 
 const hasAccess = dir => {
   try {
@@ -43,4 +44,4 @@ function saveToFile(string, filePath, gzip = false) {
     .on('finish', () => console.log(`Finished writing ${filePath}`));
 }
 
-module.exports = { saveToFile, processCss };
+export { saveToFile, processCss };

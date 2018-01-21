@@ -1,8 +1,8 @@
-const buildMoveTree = require('./build-move-tree');
-const recommendBestMove = require('./recommend-best-move');
-const winnerOfBoard = require('./winner-of-board');
+import buildMoveTree from './build-move-tree';
+import recommendBestMove from './recommend-best-move';
+import winnerOfBoard from './winner-of-board';
 
-module.exports = function recommendationHash(board, player, opponent) {
+export default function recommendationHash(board, player, opponent) {
   const hash = {};
   const moveTree = buildMoveTree(board, player, opponent);
 
@@ -48,4 +48,4 @@ module.exports = function recommendationHash(board, player, opponent) {
 
   moveForNode(moveTree);
   return hash;
-};
+}

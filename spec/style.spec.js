@@ -1,4 +1,4 @@
-const { Style, computedStyles } = require('../src/utils/markup/styles');
+import { Style, computedStyles } from '../src/utils/markup/styles';
 
 describe('styles', () => {
   describe('Style', () => {

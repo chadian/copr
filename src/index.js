@@ -1,9 +1,9 @@
-const Board = require('./src/board');
-const Player = require('./src/player');
-const recommendationHash = require('./src/utils/recommendations-hash');
-const { BOARD_INDEXES } = require('./src/utils/markup/constants');
-const { saveToFile, processCss } = require('./src/utils/compile');
-const {
+import Board from './board';
+import Player from './player';
+import recommendationHash from './utils/recommendations-hash';
+import { BOARD_INDEXES } from './utils/markup/constants';
+import { saveToFile, processCss } from './utils/compile';
+import {
   containerStart,
   containerEnd,
   humanCheckbox,
@@ -12,13 +12,13 @@ const {
   boardSquare,
   starOnGithub,
   playAgain
-} = require('./src/utils/markup/templates');
-const {
+} from './utils/markup/templates';
+import {
   StyleSheet,
   baseStyles,
   computedStyles,
   expandedStyles
-} = require('./src/utils/markup/styles');
+} from './utils/markup/styles';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const isProduction = NODE_ENV === 'production';

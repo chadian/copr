@@ -1,6 +1,6 @@
-const Board = require('../src/board');
-const recommendationHash = require('../src/utils/recommendations-hash');
-const { playerX, playerO, _ } = require('./stubs/player');
+import Board from '../src/board';
+import recommendationHash from '../src/utils/recommendations-hash';
+import { playerX, playerO, _ } from './stubs/player';
 
 const X = playerX.symbol;
 const O = playerO.symbol;

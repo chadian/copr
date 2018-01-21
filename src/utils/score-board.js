@@ -1,5 +1,5 @@
-const winnerOfBoard = require('./winner-of-board');
-const buildMoveTree = require('./build-move-tree');
+import winnerOfBoard from './winner-of-board';
+import buildMoveTree from './build-move-tree';
 
 const POINTS = {
   WIN: 1,
@@ -32,4 +32,4 @@ function recursiveScore(moveNode, favouredPlayer) {
   return limitingFunction(...childrenScores);
 }
 
-module.exports = scoreBoard;
+export default scoreBoard;
