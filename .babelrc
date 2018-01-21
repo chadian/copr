@@ -1,5 +1,5 @@
 {
-  "plugins": ["babel-plugin-rewire", "transform-es2015-modules-commonjs"],
+  "plugins": ["transform-es2015-modules-commonjs"],
   "presets": [
     [
       "env",
@@ -10,5 +10,10 @@
         }
       }
     ]
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["babel-plugin-rewire"]
+    }
+  }
 }
