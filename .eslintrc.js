@@ -5,19 +5,10 @@ module.exports = {
     node: true,
     jasmine: true
   },
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2017
+  parserOptions: {
+    sourceType: "module",
+    ecmaVersion: 2017
   },
-  extends: [
-    "eslint:recommended",
-    // prettier comes last so it has final say
-    "prettier"
-  ],
-  rules: {
-    indent: ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "single"],
-    semi: ["error", "always"]
-  }
+  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  rules: {}
 };

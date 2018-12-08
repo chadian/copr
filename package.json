@@ -8,10 +8,8 @@
   "scripts": {
     "build": "babel-node src",
     "test": "babel-node spec/support/run.js",
-    "format": "prettier-eslint --list-different --write \"**/*.js\"",
-    "format-fix-staged": "git diff --name-only --cached | grep .*\\.js | xargs prettier-eslint --write",
-    "eslint": "node_modules/.bin/eslint .",
-    "eslint-check-staged": "./scripts/eslint-staged.sh"
+    "eslint": "eslint src spec",
+    "format": "eslint --fix src spec"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -25,16 +23,13 @@
   "devDependencies": {
     "babel-plugin-rewire": "^1.1.0",
     "eslint": "^4.15.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-jasmine": "^2.9.1",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-jasmine": "^2.10.1",
+    "eslint-plugin-prettier": "^3.0.0",
     "jasmine": "^2.8.0",
-    "pre-commit": "^1.2.2",
-    "prettier-eslint-cli": "^4.7.0",
+    "prettier": "^1.15.3",
     "proxyquire": "^1.8.0",
     "puppeteer": "^0.13.0",
     "static-server": "^3.0.0"
-  },
-  "pre-commit": [
-    "eslint-check-staged"
-  ]
+  }
 }
