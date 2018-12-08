@@ -64,7 +64,9 @@ class MediaQuery {
   }
 }
 
-const expandedStyles = new MediaQuery("@media screen and (min-width: 550px)");
+const mediaQueryAboveMobileStyles = new MediaQuery(
+  "@media screen and (min-width: 550px)"
+);
 
 const style = {};
 
@@ -92,7 +94,7 @@ style.tabletBoardSquare = new Style(`.${BOARD_ELEMENT.SQUARE}`, {
   height: "125px"
 });
 
-expandedStyles.add(style.tabletBoardSquare);
+mediaQueryAboveMobileStyles.add(style.tabletBoardSquare);
 
 style.horizontalGrid = new Style(
   `.${BOARD_ELEMENT.SQUARE}:nth-of-type(1),` +
@@ -129,7 +131,7 @@ style.tabletHorizontalGrid = new Style(
     "border-bottom": "10px solid #94b7ed"
   }
 );
-expandedStyles.add(style.tabletHorizontalGrid);
+mediaQueryAboveMobileStyles.add(style.tabletHorizontalGrid);
 
 style.tabletVerticalGrid = new Style(
   `.${BOARD_ELEMENT.SQUARE}:nth-of-type(1),` +
@@ -142,7 +144,7 @@ style.tabletVerticalGrid = new Style(
     "border-right": "10px solid #94b7ed"
   }
 );
-expandedStyles.add(style.tabletVerticalGrid);
+mediaQueryAboveMobileStyles.add(style.tabletVerticalGrid);
 
 style.boardSquareClear = new Style(
   // clear float for every third piece
@@ -170,6 +172,14 @@ style.hideAllCheckboxes = new Style("input[type=checkbox]", {
   display: "none"
 });
 
+style.humanChoice = new Style(
+  `.${PLAYER.HUMAN_STRING}-${BOARD_ELEMENT.LABEL}`,
+  {
+    cursor: "pointer",
+    "z-index": 1
+  }
+);
+
 style.aiChoice = new Style(`.${PLAYER.AI_STRING}-${BOARD_ELEMENT.LABEL}`, {
   // ai choice is hidden by default
   opacity: "0",
@@ -189,7 +199,7 @@ style.aiChoice = new Style(`.${PLAYER.AI_STRING}-${BOARD_ELEMENT.LABEL}`, {
   margin: "0",
   cursor: "pointer",
   // z-index to appear relative board squares
-  "z-index": "1"
+  "z-index": "2"
 });
 
 style.tabletAiChoice = new Style(
@@ -200,7 +210,7 @@ style.tabletAiChoice = new Style(
     position: "absolute"
   }
 );
-expandedStyles.add(style.tabletAiChoice);
+mediaQueryAboveMobileStyles.add(style.tabletAiChoice);
 
 style.aiWin = new Style("#aiWin", {
   // hidden by default
@@ -219,8 +229,9 @@ style.aiWin = new Style("#aiWin", {
   right: "0",
   margin: "0",
   cursor: "pointer",
+
   // z-index to appear relative board squares
-  "z-index": "1"
+  "z-index": "2"
 });
 
 style.tabletAiWin = new Style("#aiWin", {
@@ -245,13 +256,13 @@ style.aiDraw = new Style("#aiDraw", {
   margin: "0",
   cursor: "pointer",
   // z-index to appear relative board squares
-  "z-index": "1"
+  "z-index": "2"
 });
 
 style.tabletAiDraw = new Style("#aiDraw", {
   position: "absolute"
 });
-expandedStyles.add(style.aiDraw);
+mediaQueryAboveMobileStyles.add(style.aiDraw);
 
 style.window = new Style(".window", {
   border: "0.25rem solid #fff",
@@ -268,7 +279,7 @@ style.centeredWindow = new Style(".window", {
   width: "650px",
   transform: "translate(-50%, -50%)"
 });
-expandedStyles.add(style.centeredWindow);
+mediaQueryAboveMobileStyles.add(style.centeredWindow);
 
 style.textGlow = new Style("*", {
   "text-shadow": "0px 0px 13px rgba(255, 255, 255, 0.5)"
@@ -295,7 +306,10 @@ style.button = new Style(".button", {
   "text-decoration": "none",
   border: "1px solid white",
   padding: "0.25rem 0.75rem",
-  "font-size": "0.75rem"
+  "font-size": "0.75rem",
+  "font-family": "inherit",
+  background: "transparent",
+  cursor: "pointer"
 });
 
 style.clearFix = new Style(".clear-fix", {
@@ -337,7 +351,7 @@ style.topSticky = new Style(".top-sticky", {
   "margin-top": "0"
 });
 
-expandedStyles.add(style.topSticky);
+mediaQueryAboveMobileStyles.add(style.topSticky);
 
 const mapBoardToSelector = (board, forSymbol, prefix) => {
   const selector = i => `#${fullId(prefix, BOARD_ELEMENT.CHECKBOX, i)}`;
@@ -476,5 +490,5 @@ export {
   StyleSheet,
   style as baseStyles,
   computedStyles,
-  expandedStyles
+  mediaQueryAboveMobileStyles
 };
