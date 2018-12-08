@@ -96,7 +96,7 @@ const markup = [
   "<h1>COPR</h1>",
   "<h2>CSS Operation Plan Response</h2>",
   "<p>Shall we play a game?</p>",
-
+  "<form>",
   '<div class="board">',
   // board and mechanics
   boardMap(humanCheckbox).join(""),
@@ -107,8 +107,8 @@ const markup = [
   `<div id="aiDraw"><div>Stalemate.</div>${playAgain}${starOnGithub}</div>`,
   '<div class="clear-fix"></div>',
   "</div>",
-
-  '<a class="button" href=".">Restart</a>',
+  '<button type="reset" class="button">Restart</button>',
+  "</form>",
   `<link rel="stylesheet" type="text/css" href="${logicalCssUrlPath}logical.css" />`,
   `<div class="top-sticky">${starOnGithub}</div>`,
 

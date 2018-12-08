@@ -306,7 +306,10 @@ style.button = new Style(".button", {
   "text-decoration": "none",
   border: "1px solid white",
   padding: "0.25rem 0.75rem",
-  "font-size": "0.75rem"
+  "font-size": "0.75rem",
+  "font-family": "inherit",
+  background: "transparent",
+  cursor: "pointer"
 });
 
 style.clearFix = new Style(".clear-fix", {
