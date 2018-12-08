@@ -75,6 +75,7 @@ criticalStyleSheet.add(
   baseStyles.verticalGrid,
   baseStyles.playerResult,
   baseStyles.hideAllCheckboxes,
+  baseStyles.humanChoice,
   baseStyles.aiChoice,
   baseStyles.aiWin,
   baseStyles.aiDraw,

@@ -64,7 +64,9 @@ class MediaQuery {
   }
 }
 
-const mediaQueryAboveMobileStyles = new MediaQuery("@media screen and (min-width: 550px)");
+const mediaQueryAboveMobileStyles = new MediaQuery(
+  "@media screen and (min-width: 550px)"
+);
 
 const style = {};
 
@@ -170,6 +172,14 @@ style.hideAllCheckboxes = new Style("input[type=checkbox]", {
   display: "none"
 });
 
+style.humanChoice = new Style(
+  `.${PLAYER.HUMAN_STRING}-${BOARD_ELEMENT.LABEL}`,
+  {
+    cursor: "pointer",
+    "z-index": 1
+  }
+);
+
 style.aiChoice = new Style(`.${PLAYER.AI_STRING}-${BOARD_ELEMENT.LABEL}`, {
   // ai choice is hidden by default
   opacity: "0",
@@ -189,7 +199,7 @@ style.aiChoice = new Style(`.${PLAYER.AI_STRING}-${BOARD_ELEMENT.LABEL}`, {
   margin: "0",
   cursor: "pointer",
   // z-index to appear relative board squares
-  "z-index": "1"
+  "z-index": "2"
 });
 
 style.tabletAiChoice = new Style(
@@ -219,8 +229,9 @@ style.aiWin = new Style("#aiWin", {
   right: "0",
   margin: "0",
   cursor: "pointer",
+
   // z-index to appear relative board squares
-  "z-index": "1"
+  "z-index": "2"
 });
 
 style.tabletAiWin = new Style("#aiWin", {
