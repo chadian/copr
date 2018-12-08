@@ -1,6 +1,6 @@
-import buildMoveTree from './build-move-tree';
-import recommendBestMove from './recommend-best-move';
-import winnerOfBoard from './winner-of-board';
+import buildMoveTree from "./build-move-tree";
+import recommendBestMove from "./recommend-best-move";
+import winnerOfBoard from "./winner-of-board";
 
 export default function recommendationHash(board, player, opponent) {
   const hash = {};
@@ -23,10 +23,10 @@ export default function recommendationHash(board, player, opponent) {
       .length;
 
     if (winnerOfBoard(board)) {
-      hash[hashString] = 'WIN';
+      hash[hashString] = "WIN";
     } else if (totalMovesMade === board.toArray().length) {
       // the board is completely full
-      hash[hashString] = 'DRAW';
+      hash[hashString] = "DRAW";
     }
 
     if (totalMovesMade % 2 === 0 || totalMovesMade === 0) {

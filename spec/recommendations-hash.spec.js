@@ -1,6 +1,6 @@
-import Board from '../src/board';
-import recommendationHash from '../src/utils/recommendations-hash';
-import { playerX, playerO, _ } from './stubs/player';
+import Board from "../src/board";
+import recommendationHash from "../src/utils/recommendations-hash";
+import { playerX, playerO, _ } from "./stubs/player";
 
 const X = playerX.symbol;
 const O = playerO.symbol;
@@ -11,7 +11,7 @@ let allMovesHash;
 // with recommend-best-move, but these tests provide reassurance
 // for the serialization of recommendations to the hash
 
-describe('recommendations-hash', () => {
+describe("recommendations-hash", () => {
   beforeEach(() => {
     allMovesHash = recommendationHash(
       Board.generateEmptyBoard(),
@@ -21,14 +21,14 @@ describe('recommendations-hash', () => {
   });
 
   // this test ensures that the human player always gets the first move
-  it('does not have a recommendation for an empty board', () => {
+  it("does not have a recommendation for an empty board", () => {
     const board = [_, _, _, _, _, _, _, _, _];
     const recommendation = allMovesHash[new Board(board).toArray().toString()];
     expect(recommendation).toBe(undefined);
   });
 
-  describe('blocking sample', () => {
-    it('🐸', () => {
+  describe("blocking sample", () => {
+    it("🐸", () => {
       const board = [_, X, X, _, _, _, _, O, _];
 
       const recommendation =

@@ -1,11 +1,11 @@
 /* eslint no-console: 0 */
-import { Readable, PassThrough } from 'stream';
+import { Readable, PassThrough } from "stream";
 
-import fs from 'fs';
-import path from 'path';
-import zlib from 'zlib';
-import postcss from 'postcss';
-import cssnano from 'cssnano';
+import fs from "fs";
+import path from "path";
+import zlib from "zlib";
+import postcss from "postcss";
+import cssnano from "cssnano";
 
 const hasAccess = dir => {
   try {
@@ -41,7 +41,7 @@ function saveToFile(string, filePath, gzip = false) {
   readStream
     .pipe(gzip ? gzipStream : passThroughStream)
     .pipe(writeStream)
-    .on('finish', () => console.log(`Finished writing ${filePath}`));
+    .on("finish", () => console.log(`Finished writing ${filePath}`));
 }
 
 export { saveToFile, processCss };

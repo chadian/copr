@@ -1,6 +1,6 @@
-import Board from '../board';
-import scoreBoard from './score-board';
-import { memoizeBoardWithPlayers } from './cache';
+import Board from "../board";
+import scoreBoard from "./score-board";
+import { memoizeBoardWithPlayers } from "./cache";
 
 function recommendBestMove(board, previousPlayer, nextPlayer) {
   const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
@@ -35,8 +35,8 @@ function recommendBestMove(board, previousPlayer, nextPlayer) {
   );
 
   // should have a move with a numbered spot index on the board
-  if (typeof bestMove.spot !== 'number') {
-    throw new Error('Unable to determine a recommended best move for board');
+  if (typeof bestMove.spot !== "number") {
+    throw new Error("Unable to determine a recommended best move for board");
   }
 
   return bestMove.spot;

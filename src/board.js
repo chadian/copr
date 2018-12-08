@@ -1,4 +1,4 @@
-import { splitEvery } from 'ramda';
+import { splitEvery } from "ramda";
 
 class Board {
   constructor(board) {
@@ -43,17 +43,17 @@ class Board {
   }
 
   toHash() {
-    return this.board.join('-');
+    return this.board.join("-");
   }
 
   toString() {
     return splitEvery(3, this.board)
-      .map(row => row.join(' '))
-      .join('\n');
+      .map(row => row.join(" "))
+      .join("\n");
   }
 }
 
-Board.EMPTY_SPOT_SYMBOL = '_';
+Board.EMPTY_SPOT_SYMBOL = "_";
 Board.WINNING_LINES = (function() {
   const combinations = [];
 

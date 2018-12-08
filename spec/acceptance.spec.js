@@ -1,14 +1,14 @@
 /*global window*/
 
-import { BOARD_ELEMENT, PLAYER } from '../src/utils/markup/constants';
-import * as position from './stubs/position';
-import { uniq } from 'ramda';
-import { classFormat, fullId } from '../src/utils/markup/formats';
-import puppeteer from 'puppeteer';
-import StaticServer from 'static-server';
-import path from 'path';
+import { BOARD_ELEMENT, PLAYER } from "../src/utils/markup/constants";
+import * as position from "./stubs/position";
+import { uniq } from "ramda";
+import { classFormat, fullId } from "../src/utils/markup/formats";
+import puppeteer from "puppeteer";
+import StaticServer from "static-server";
+import path from "path";
 
-const dist = path.resolve(__dirname, '../dist/');
+const dist = path.resolve(__dirname, "../dist/");
 const STATIC_SERVER_PORT = 5000;
 const STATIC_SERVER_URL = `http://localhost:${STATIC_SERVER_PORT}`;
 
@@ -34,7 +34,7 @@ const computedStyle = page => (selector, styleProp) =>
     );
   });
 
-describe('Acceptance', () => {
+describe("Acceptance", () => {
   beforeAll(async () => {
     server = new StaticServer({ port: STATIC_SERVER_PORT, rootPath: dist });
 
@@ -50,22 +50,22 @@ describe('Acceptance', () => {
     done();
   });
 
-  it('sees a rendered board', async done => {
+  it("sees a rendered board", async done => {
     const page = await browser.newPage();
     await page.goto(STATIC_SERVER_URL);
     const styles = computedStyle(page);
 
     const boardSquareSelector = classFormat(null, `.${BOARD_ELEMENT.SQUARE}`);
-    const display = uniq(await styles(boardSquareSelector, 'display'));
+    const display = uniq(await styles(boardSquareSelector, "display"));
 
     expect(display.length).toBe(1);
-    expect(display).toContain('block');
+    expect(display).toContain("block");
 
     page.close();
     done();
   });
 
-  it('plays the game to a stalemate', async done => {
+  it("plays the game to a stalemate", async done => {
     const page = await browser.newPage();
     await page.goto(STATIC_SERVER_URL);
     const styles = computedStyle(page);
@@ -74,17 +74,17 @@ describe('Acceptance', () => {
       `.${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.LABEL, index)}`;
     const clickSpot = index => page.click(humanSpotSelector(index));
     const aiMove = async function() {
-      let { x, y } = await page.$eval('.window', gameWindow => {
+      let { x, y } = await page.$eval(".window", gameWindow => {
         const { x, y, width, height } = gameWindow.getBoundingClientRect();
         return { x: x + width / 2, y: y + height / 2 };
       });
       await page.mouse.click(x, y);
     };
 
-    const tieGameDisplay = async () => uniq(await styles('#aiDraw', 'display'));
+    const tieGameDisplay = async () => uniq(await styles("#aiDraw", "display"));
 
     // initial tie game screen is display: none
-    expect(await tieGameDisplay()).toContain('none');
+    expect(await tieGameDisplay()).toContain("none");
 
     // play a game to a tie
     await clickSpot(position.TOP_LEFT);
@@ -98,7 +98,7 @@ describe('Acceptance', () => {
     await clickSpot(position.MIDDLE_RIGHT);
 
     // expect tie game screen to display: block
-    expect(await tieGameDisplay()).toContain('block');
+    expect(await tieGameDisplay()).toContain("block");
     done();
   });
 });
