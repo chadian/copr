@@ -17,7 +17,7 @@ import {
   StyleSheet,
   baseStyles,
   computedStyles,
-  expandedStyles
+  mediaQueryAboveMobileStyles
 } from "./utils/markup/styles";
 
 const NODE_ENV = process.env.NODE_ENV || "development";
@@ -86,7 +86,7 @@ criticalStyleSheet.add(
   baseStyles.clearFix,
   baseStyles.verticalRhythmReset,
   baseStyles.verticalRhythm,
-  expandedStyles
+  mediaQueryAboveMobileStyles
 );
 
 const markup = [
