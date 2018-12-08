@@ -60,6 +60,7 @@ const containerStart = ({ head }) => `
   <head>
     <title>COPR, CSS Operation Plan Response</title>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     ${head ? head : ""}
   </head>
   <body><div class="window">`;
