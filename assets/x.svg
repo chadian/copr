@@ -1,0 +1,14 @@
+<svg
+  width="110"
+  height="110"
+  viewBox="0 0 110 110"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title>x</title>
+  <path
+    d="M5 5l100 100m0-100L5 105"
+    stroke="#94B7ED"
+    stroke-width="15"
+    fill="none"
+  />
+</svg>;
