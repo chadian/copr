@@ -1,5 +1,5 @@
-import winnerOfBoard from './winner-of-board';
-import buildMoveTree from './build-move-tree';
+import winnerOfBoard from "./winner-of-board";
+import buildMoveTree from "./build-move-tree";
 
 const POINTS = {
   WIN: 1,

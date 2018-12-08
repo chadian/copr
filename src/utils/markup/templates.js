@@ -1,5 +1,5 @@
-import { fullId, classFormat } from './formats';
-import { BOARD_ELEMENT, PLAYER } from './constants';
+import { fullId, classFormat } from "./formats";
+import { BOARD_ELEMENT, PLAYER } from "./constants";
 
 const checkbox = (prefix, index) => {
   return `<input
@@ -11,7 +11,7 @@ const checkbox = (prefix, index) => {
 const aiCheckbox = index => checkbox(PLAYER.AI_STRING, index);
 const humanCheckbox = index => checkbox(PLAYER.HUMAN_STRING, index);
 
-const label = (prefix, index, labelText = '') => {
+const label = (prefix, index, labelText = "") => {
   return `<label
     id="${fullId(prefix, BOARD_ELEMENT.LABEL, index)}"
     for="${fullId(prefix, BOARD_ELEMENT.CHECKBOX, index)}"
@@ -33,17 +33,17 @@ const boardSquare = index => {
     <div class="${classFormat(null, BOARD_ELEMENT.SQUARE, index)}">
       <div id="${fullId(PLAYER.AI_STRING, BOARD_ELEMENT.RESULT, index)}"
            class="${classFormat(
-    PLAYER.AI_STRING,
-    BOARD_ELEMENT.RESULT,
-    index
-  )}">
+             PLAYER.AI_STRING,
+             BOARD_ELEMENT.RESULT,
+             index
+           )}">
       </div>
       <div id="${fullId(PLAYER.HUMAN_STRING, BOARD_ELEMENT.RESULT, index)}"
            class="${classFormat(
-    PLAYER.HUMAN_STRING,
-    BOARD_ELEMENT.RESULT,
-    index
-  )}">
+             PLAYER.HUMAN_STRING,
+             BOARD_ELEMENT.RESULT,
+             index
+           )}">
       </div>
       ${humanLabel(index)}
     </div>
@@ -60,7 +60,7 @@ const containerStart = ({ head }) => `
   <head>
     <title>COPR, CSS Operation Plan Response</title>
     <meta charset="utf-8"/>
-    ${head ? head : ''}
+    ${head ? head : ""}
   </head>
   <body><div class="window">`;
 

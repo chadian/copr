@@ -1,18 +1,18 @@
-import { BOARD_ELEMENT, PLAYER } from './constants';
-import { fullId } from './formats';
+import { BOARD_ELEMENT, PLAYER } from "./constants";
+import { fullId } from "./formats";
 
 class Style {
   constructor(selectors, style) {
-    if (typeof selectors === 'string') selectors = [selectors];
+    if (typeof selectors === "string") selectors = [selectors];
     this.selectors = selectors;
     this.style = style;
   }
 
   toString() {
-    const selectors = this.selectors.join(',');
+    const selectors = this.selectors.join(",");
     const styles = Object.keys(this.style)
       .map(prop => `${prop}:${this.style[prop]};`)
-      .join('');
+      .join("");
     return `${selectors} {${styles}}`;
   }
 }
@@ -35,7 +35,7 @@ class StyleSheet {
   }
 
   toString() {
-    return this.styles.map(style => style.toString()).join('');
+    return this.styles.map(style => style.toString()).join("");
   }
 }
 
@@ -60,36 +60,36 @@ class MediaQuery {
   toString() {
     return `${this.query} { ${this.styles
       .map(style => style.toString())
-      .join('')} }`;
+      .join("")} }`;
   }
 }
 
-const expandedStyles = new MediaQuery('@media screen and (min-width: 550px)');
+const expandedStyles = new MediaQuery("@media screen and (min-width: 550px)");
 
 const style = {};
 
-style.base = new Style(['html', 'body'], {
-  'background-color': '#101721',
-  'font-family': 'VT323, Helvetica Neue, Helvetica, Arial, sans-serif',
-  'font-size': '30px',
-  color: '#94b7ed',
-  padding: '0',
-  margin: '0',
-  position: 'relative',
-  height: '100%'
+style.base = new Style(["html", "body"], {
+  "background-color": "#101721",
+  "font-family": "VT323, Helvetica Neue, Helvetica, Arial, sans-serif",
+  "font-size": "30px",
+  color: "#94b7ed",
+  padding: "0",
+  margin: "0",
+  position: "relative",
+  height: "100%"
 });
 
 style.boardSquare = new Style(`.${BOARD_ELEMENT.SQUARE}`, {
-  float: 'left',
-  width: '75px',
-  height: '75px',
-  position: 'relative',
-  'max-width': '30%'
+  float: "left",
+  width: "75px",
+  height: "75px",
+  position: "relative",
+  "max-width": "30%"
 });
 
 style.tabletBoardSquare = new Style(`.${BOARD_ELEMENT.SQUARE}`, {
-  width: '125px',
-  height: '125px'
+  width: "125px",
+  height: "125px"
 });
 
 expandedStyles.add(style.tabletBoardSquare);
@@ -102,7 +102,7 @@ style.horizontalGrid = new Style(
     `.${BOARD_ELEMENT.SQUARE}:nth-of-type(5),` +
     `.${BOARD_ELEMENT.SQUARE}:nth-of-type(6)`,
   {
-    'border-bottom': '5px solid #94b7ed'
+    "border-bottom": "5px solid #94b7ed"
   }
 );
 
@@ -114,7 +114,7 @@ style.verticalGrid = new Style(
     `.${BOARD_ELEMENT.SQUARE}:nth-of-type(7),` +
     `.${BOARD_ELEMENT.SQUARE}:nth-of-type(8)`,
   {
-    'border-right': '5px solid #94b7ed'
+    "border-right": "5px solid #94b7ed"
   }
 );
 
@@ -126,7 +126,7 @@ style.tabletHorizontalGrid = new Style(
     `.${BOARD_ELEMENT.SQUARE}:nth-of-type(5),` +
     `.${BOARD_ELEMENT.SQUARE}:nth-of-type(6)`,
   {
-    'border-bottom': '10px solid #94b7ed'
+    "border-bottom": "10px solid #94b7ed"
   }
 );
 expandedStyles.add(style.tabletHorizontalGrid);
@@ -139,7 +139,7 @@ style.tabletVerticalGrid = new Style(
     `.${BOARD_ELEMENT.SQUARE}:nth-of-type(7),` +
     `.${BOARD_ELEMENT.SQUARE}:nth-of-type(8)`,
   {
-    'border-right': '10px solid #94b7ed'
+    "border-right": "10px solid #94b7ed"
   }
 );
 expandedStyles.add(style.tabletVerticalGrid);
@@ -147,7 +147,7 @@ expandedStyles.add(style.tabletVerticalGrid);
 style.boardSquareClear = new Style(
   // clear float for every third piece
   `.${BOARD_ELEMENT.SQUARE}:nth-of-type(3n+1)`,
-  { clear: 'left' }
+  { clear: "left" }
 );
 
 // reflect either the human label or the resulting ai-choice
@@ -158,38 +158,38 @@ style.playerResult = new Style(
     `.${BOARD_ELEMENT.SQUARE} .${PLAYER.AI_STRING}-${BOARD_ELEMENT.RESULT}`
   ],
   {
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    left: '0',
-    bottom: '0'
+    position: "absolute",
+    top: "0",
+    right: "0",
+    left: "0",
+    bottom: "0"
   }
 );
 
-style.hideAllCheckboxes = new Style('input[type=checkbox]', {
-  display: 'none'
+style.hideAllCheckboxes = new Style("input[type=checkbox]", {
+  display: "none"
 });
 
 style.aiChoice = new Style(`.${PLAYER.AI_STRING}-${BOARD_ELEMENT.LABEL}`, {
   // ai choice is hidden by default
-  opacity: '0',
-  display: 'none',
+  opacity: "0",
+  display: "none",
 
-  'padding-top': 'calc(50% - 1em)',
-  'box-sizing': 'border-box',
-  'padding-left': '1em',
-  position: 'fixed',
-  width: '100%',
-  height: '100%',
-  background: 'rgba(0, 0, 0, 0.97)',
-  top: '0',
-  bottom: '0',
-  left: '0',
-  right: '0',
-  margin: '0',
-  cursor: 'pointer',
+  "padding-top": "calc(50% - 1em)",
+  "box-sizing": "border-box",
+  "padding-left": "1em",
+  position: "fixed",
+  width: "100%",
+  height: "100%",
+  background: "rgba(0, 0, 0, 0.97)",
+  top: "0",
+  bottom: "0",
+  left: "0",
+  right: "0",
+  margin: "0",
+  cursor: "pointer",
   // z-index to appear relative board squares
-  'z-index': '1'
+  "z-index": "1"
 });
 
 style.tabletAiChoice = new Style(
@@ -197,144 +197,144 @@ style.tabletAiChoice = new Style(
   {
     // confined to the boundaries of the board
     // by its relative position
-    position: 'absolute'
+    position: "absolute"
   }
 );
 expandedStyles.add(style.tabletAiChoice);
 
-style.aiWin = new Style('#aiWin', {
+style.aiWin = new Style("#aiWin", {
   // hidden by default
-  display: 'none',
+  display: "none",
 
-  'font-size': '1.5rem',
-  padding: '1em',
-  'box-sizing': 'border-box',
-  position: 'fixed',
-  width: '100%',
-  height: '100%',
-  background: 'rgba(0, 0, 0, 0.85)',
-  top: '0',
-  bottom: '0',
-  left: '0',
-  right: '0',
-  margin: '0',
-  cursor: 'pointer',
+  "font-size": "1.5rem",
+  padding: "1em",
+  "box-sizing": "border-box",
+  position: "fixed",
+  width: "100%",
+  height: "100%",
+  background: "rgba(0, 0, 0, 0.85)",
+  top: "0",
+  bottom: "0",
+  left: "0",
+  right: "0",
+  margin: "0",
+  cursor: "pointer",
   // z-index to appear relative board squares
-  'z-index': '1'
+  "z-index": "1"
 });
 
-style.tabletAiWin = new Style('#aiWin', {
-  position: 'absolute'
+style.tabletAiWin = new Style("#aiWin", {
+  position: "absolute"
 });
 
-style.aiDraw = new Style('#aiDraw', {
+style.aiDraw = new Style("#aiDraw", {
   // hidden by default
-  display: 'none',
+  display: "none",
 
-  'font-size': '1.5rem',
-  padding: '1em',
-  'box-sizing': 'border-box',
-  position: 'fixed',
-  width: '100%',
-  height: '100%',
-  background: 'rgba(0, 0, 0, 0.85)',
-  top: '0',
-  bottom: '0',
-  left: '0',
-  right: '0',
-  margin: '0',
-  cursor: 'pointer',
+  "font-size": "1.5rem",
+  padding: "1em",
+  "box-sizing": "border-box",
+  position: "fixed",
+  width: "100%",
+  height: "100%",
+  background: "rgba(0, 0, 0, 0.85)",
+  top: "0",
+  bottom: "0",
+  left: "0",
+  right: "0",
+  margin: "0",
+  cursor: "pointer",
   // z-index to appear relative board squares
-  'z-index': '1'
+  "z-index": "1"
 });
 
-style.tabletAiDraw = new Style('#aiDraw', {
-  position: 'absolute'
+style.tabletAiDraw = new Style("#aiDraw", {
+  position: "absolute"
 });
 expandedStyles.add(style.aiDraw);
 
-style.window = new Style('.window', {
-  border: '0.25rem solid #fff',
-  'max-width': '100%',
-  'box-sizing': 'border-box',
-  padding: '15px'
+style.window = new Style(".window", {
+  border: "0.25rem solid #fff",
+  "max-width": "100%",
+  "box-sizing": "border-box",
+  padding: "15px"
 });
 
-style.centeredWindow = new Style('.window', {
-  padding: '25px',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  width: '650px',
-  transform: 'translate(-50%, -50%)'
+style.centeredWindow = new Style(".window", {
+  padding: "25px",
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  width: "650px",
+  transform: "translate(-50%, -50%)"
 });
 expandedStyles.add(style.centeredWindow);
 
-style.textGlow = new Style('*', {
-  'text-shadow': '0px 0px 13px rgba(255, 255, 255, 0.5)'
+style.textGlow = new Style("*", {
+  "text-shadow": "0px 0px 13px rgba(255, 255, 255, 0.5)"
 });
 
-style.h1 = new Style('h1', {
-  'font-size': '1rem',
-  'letter-spacing': '1.5rem',
-  'margin-top': '0'
+style.h1 = new Style("h1", {
+  "font-size": "1rem",
+  "letter-spacing": "1.5rem",
+  "margin-top": "0"
 });
 
-style.h2 = new Style('h2', {
-  'font-size': '1.25rem'
+style.h2 = new Style("h2", {
+  "font-size": "1.25rem"
 });
 
-style.headings = new Style(['h1', 'h2', 'h3'], {
-  'font-family': 'Helvetica Neue, Helvetica, Arial, sans-serif',
-  color: '#fff'
+style.headings = new Style(["h1", "h2", "h3"], {
+  "font-family": "Helvetica Neue, Helvetica, Arial, sans-serif",
+  color: "#fff"
 });
 
-style.button = new Style('.button', {
-  display: 'inline-block',
-  color: '#fff',
-  'text-decoration': 'none',
-  border: '1px solid white',
-  padding: '0.25rem 0.75rem',
-  'font-size': '0.75rem'
+style.button = new Style(".button", {
+  display: "inline-block",
+  color: "#fff",
+  "text-decoration": "none",
+  border: "1px solid white",
+  padding: "0.25rem 0.75rem",
+  "font-size": "0.75rem"
 });
 
-style.clearFix = new Style('.clear-fix', {
-  clear: 'both',
-  height: '0',
-  margin: '0'
+style.clearFix = new Style(".clear-fix", {
+  clear: "both",
+  height: "0",
+  margin: "0"
 });
 
-style.board = new Style('.board', {
-  padding: '1em 0'
+style.board = new Style(".board", {
+  padding: "1em 0"
 });
 
-style.loading = new Style('.board > .square', {
-  display: 'none'
+style.loading = new Style(".board > .square", {
+  display: "none"
 });
 
-style.finishedLoading = new Style('.board > .square', {
-  display: 'block'
+style.finishedLoading = new Style(".board > .square", {
+  display: "block"
 });
 
 style.verticalRhythmReset = new Style(
-  ['*', `.${BOARD_ELEMENT.SQUARE}`, `.${BOARD_ELEMENT.SQUARE} > *`],
+  ["*", `.${BOARD_ELEMENT.SQUARE}`, `.${BOARD_ELEMENT.SQUARE} > *`],
   {
-    'margin-top': '0',
-    'margin-bottom': '0',
-    'padding-top': '0',
-    'padding-bottom': '0'
+    "margin-top": "0",
+    "margin-bottom": "0",
+    "padding-top": "0",
+    "padding-bottom": "0"
   }
 );
 
-style.verticalRhythm = new Style('* + *', {
-  'margin-top': '0.5em'
+style.verticalRhythm = new Style("* + *", {
+  "margin-top": "0.5em"
 });
 
-style.topSticky = new Style('.top-sticky', {
-  position: 'fixed',
-  top: '25px',
-  right: '25px',
-  'margin-top': '0'
+style.topSticky = new Style(".top-sticky", {
+  position: "fixed",
+  top: "25px",
+  right: "25px",
+  "margin-top": "0"
 });
 
 expandedStyles.add(style.topSticky);
@@ -344,10 +344,10 @@ const mapBoardToSelector = (board, forSymbol, prefix) => {
 
   return board
     .map((boardSymbol, i) => {
-      const pseudo = boardSymbol === forSymbol ? ':checked' : ':not(:checked)';
+      const pseudo = boardSymbol === forSymbol ? ":checked" : ":not(:checked)";
       return selector(i) + pseudo;
     })
-    .join(' ~ ');
+    .join(" ~ ");
 };
 
 const computedStyles = {
@@ -363,14 +363,14 @@ const computedStyles = {
     const svg =
       '<svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg"><title>x</title><path d="M5 5l100 100m0-100L5 105" stroke="#94B7ED" stroke-width="15" fill="none" /></svg>';
     return new Style(selector, {
-      width: '100%',
-      height: '100%',
-      'background-image': `url("data:image/svg+xml;base64,${Buffer(
+      width: "100%",
+      height: "100%",
+      "background-image": `url("data:image/svg+xml;base64,${Buffer(
         svg
-      ).toString('base64')}")`,
-      'background-size': '85%',
-      'background-position': 'center',
-      'background-repeat': 'no-repeat'
+      ).toString("base64")}")`,
+      "background-size": "85%",
+      "background-position": "center",
+      "background-repeat": "no-repeat"
     });
   },
 
@@ -391,7 +391,7 @@ const computedStyles = {
         index
       )}`;
 
-    return new Style([humanSelected, aiSelected], { display: 'none' });
+    return new Style([humanSelected, aiSelected], { display: "none" });
   },
 
   aiResult(index) {
@@ -406,17 +406,17 @@ const computedStyles = {
     const svg =
       '<svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg"><title>Oval</title><circle cx="55.25" cy="55.25" r="47.25" stroke-width="15" stroke="#94B7ED" fill="none" fill-rule="evenodd"/></svg>';
     return new Style(selector, {
-      'background-image': `url("data:image/svg+xml;base64,${Buffer(
+      "background-image": `url("data:image/svg+xml;base64,${Buffer(
         svg
-      ).toString('base64')}")`,
-      'background-size': '85%',
-      'background-position': 'center',
-      'background-repeat': 'no-repeat'
+      ).toString("base64")}")`,
+      "background-size": "85%",
+      "background-position": "center",
+      "background-repeat": "no-repeat"
     });
   },
 
   aiChoice(board, recommendationIndex) {
-    if (typeof recommendationIndex !== 'number') return '';
+    if (typeof recommendationIndex !== "number") return "";
 
     // given the board:
     //  create a selector for the human state of checkboxes,
@@ -424,15 +424,15 @@ const computedStyles = {
     //  and choice (represented by a label) the ai should take
     const selector =
       mapBoardToSelector(board, PLAYER.HUMAN_SYMBOL, PLAYER.HUMAN_STRING) +
-      ' ~ ' +
+      " ~ " +
       mapBoardToSelector(board, PLAYER.AI_SYMBOL, PLAYER.AI_STRING) +
-      ' ~ ' +
-      '#' +
+      " ~ " +
+      "#" +
       fullId(PLAYER.AI_STRING, BOARD_ELEMENT.LABEL, recommendationIndex);
 
     return new Style(selector, {
-      opacity: '1',
-      display: 'block'
+      opacity: "1",
+      display: "block"
     });
   },
 
@@ -443,13 +443,13 @@ const computedStyles = {
     //  and the aiWin container
     const selector =
       mapBoardToSelector(board, PLAYER.HUMAN_SYMBOL, PLAYER.HUMAN_STRING) +
-      ' ~ ' +
+      " ~ " +
       mapBoardToSelector(board, PLAYER.AI_SYMBOL, PLAYER.AI_STRING) +
-      ' ~ ' +
-      '#aiWin';
+      " ~ " +
+      "#aiWin";
 
     return new Style(selector, {
-      display: 'block'
+      display: "block"
     });
   },
 
@@ -460,13 +460,13 @@ const computedStyles = {
     //  and the aiDraw container
     const selector =
       mapBoardToSelector(board, PLAYER.HUMAN_SYMBOL, PLAYER.HUMAN_STRING) +
-      ' ~ ' +
+      " ~ " +
       mapBoardToSelector(board, PLAYER.AI_SYMBOL, PLAYER.AI_STRING) +
-      ' ~ ' +
-      '#aiDraw';
+      " ~ " +
+      "#aiDraw";
 
     return new Style(selector, {
-      display: 'block'
+      display: "block"
     });
   }
 };

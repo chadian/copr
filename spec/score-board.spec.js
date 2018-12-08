@@ -1,31 +1,31 @@
-import Board from '../src/board';
-import scoreBoard from '../src/utils/score-board';
-import { playerX, playerO, _ } from './stubs/player';
+import Board from "../src/board";
+import scoreBoard from "../src/utils/score-board";
+import { playerX, playerO, _ } from "./stubs/player";
 
 const X = playerX.symbol;
 const O = playerO.symbol;
 
-describe('score-board', () => {
-  it('scores a board resulting in a win', () => {
+describe("score-board", () => {
+  it("scores a board resulting in a win", () => {
     const board = new Board([X, _, _, O, X, _, O, _, X]);
 
     expect(scoreBoard(board, playerX, playerO, playerX)).toBe(1);
   });
 
-  it('scores a board resulting in a loss', () => {
+  it("scores a board resulting in a loss", () => {
     const board = new Board([X, _, _, O, X, _, O, _, X]);
 
     expect(scoreBoard(board, playerO, playerO, playerX)).toBe(-1);
   });
 
-  it('scores a board resulting in a draw', () => {
+  it("scores a board resulting in a draw", () => {
     const board = new Board([X, O, X, O, X, O, O, X, O]);
 
     expect(scoreBoard(board, playerO, playerX, playerO)).toBe(0);
   });
 
-  describe('scores mirrored boards with the same score', () => {
-    it('is the same for + cross moves', () => {
+  describe("scores mirrored boards with the same score", () => {
+    it("is the same for + cross moves", () => {
       const top = new Board([_, X, _, _, _, _, _, _, _]);
 
       const left = new Board([_, _, _, X, _, _, _, _, _]);
@@ -47,7 +47,7 @@ describe('score-board', () => {
       );
     });
 
-    it('is the same for corner moves', () => {
+    it("is the same for corner moves", () => {
       const topLeftBoard = new Board([X, _, _, _, _, _, _, _, _]);
 
       const topRightBoard = new Board([_, _, X, _, _, _, _, _, _]);

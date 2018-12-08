@@ -1,8 +1,8 @@
-import { memoizeWith } from 'ramda';
+import { memoizeWith } from "ramda";
 
 const cacheKeyGenerator = (board, playerSymbol, opponentSymbol) => {
-  const PLAYER_CACHE_CHAR = 'X';
-  const OPPONENT_CACHE_CHAR = 'O';
+  const PLAYER_CACHE_CHAR = "X";
+  const OPPONENT_CACHE_CHAR = "O";
   const cacheKey = board
     .toArray()
     .map(symbol => {
@@ -10,7 +10,7 @@ const cacheKeyGenerator = (board, playerSymbol, opponentSymbol) => {
       if (symbol === opponentSymbol) return OPPONENT_CACHE_CHAR;
       else return symbol;
     })
-    .join(',');
+    .join(",");
 
   return cacheKey;
 };

@@ -1,5 +1,5 @@
-import Board from '../board';
-import { uniq } from 'ramda';
+import Board from "../board";
+import { uniq } from "ramda";
 
 function winnerOfBoard(board) {
   let winners = Board.WINNING_LINES.map(line => {
@@ -21,7 +21,7 @@ function winnerOfBoard(board) {
   }
 
   if (winners.length > 1) {
-    throw 'There should not be more than one winner of the board';
+    throw "There should not be more than one winner of the board";
   }
 
   return winners[0];
