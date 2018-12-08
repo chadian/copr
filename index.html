@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>COPR, CSS Operation Plan Response</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>.board > .square {display:none;}html,body {background-color:#101721;font-family:VT323, Helvetica Neue, Helvetica, Arial, sans-serif;font-size:30px;color:#94b7ed;padding:0;margin:0;position:relative;height:100%;}.window {border:0.25rem solid #fff;max-width:100%;box-sizing:border-box;padding:15px;}.board {padding:1em 0;}.square {float:left;width:75px;height:75px;position:relative;max-width:30%;}.square:nth-of-type(3n+1) {clear:left;}.square:nth-of-type(1),.square:nth-of-type(2),.square:nth-of-type(3),.square:nth-of-type(4),.square:nth-of-type(5),.square:nth-of-type(6) {border-bottom:5px solid #94b7ed;}.square:nth-of-type(1),.square:nth-of-type(2),.square:nth-of-type(4),.square:nth-of-type(5),.square:nth-of-type(7),.square:nth-of-type(8) {border-right:5px solid #94b7ed;}.square .human-label,.square .ai-result {position:absolute;top:0;right:0;left:0;bottom:0;}input[type=checkbox] {display:none;}.human-label {cursor:pointer;z-index:1;}.ai-label {opacity:0;display:none;padding-top:calc(50% - 1em);box-sizing:border-box;padding-left:1em;position:fixed;width:100%;height:100%;background:rgba(0, 0, 0, 0.97);top:0;bottom:0;left:0;right:0;margin:0;cursor:pointer;z-index:2;}#aiWin {display:none;font-size:1.5rem;padding:1em;box-sizing:border-box;position:fixed;width:100%;height:100%;background:rgba(0, 0, 0, 0.85);top:0;bottom:0;left:0;right:0;margin:0;cursor:pointer;z-index:2;}#aiDraw {display:none;font-size:1.5rem;padding:1em;box-sizing:border-box;position:fixed;width:100%;height:100%;background:rgba(0, 0, 0, 0.85);top:0;bottom:0;left:0;right:0;margin:0;cursor:pointer;z-index:2;}* {text-shadow:0px 0px 13px rgba(255, 255, 255, 0.5);}h1,h2,h3 {font-family:Helvetica Neue, Helvetica, Arial, sans-serif;color:#fff;}h1 {font-size:1rem;letter-spacing:1.5rem;margin-top:0;}h2 {font-size:1.25rem;}.button {display:inline-block;color:#fff;text-decoration:none;border:1px solid white;padding:0.25rem 0.75rem;font-size:0.75rem;font-family:inherit;background:transparent;cursor:pointer;}.clear-fix {clear:both;height:0;margin:0;}*,.square,.square > * {margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;}* + * {margin-top:0.5em;}@media screen and (min-width: 550px) { .square {width:125px;height:125px;}.square:nth-of-type(1),.square:nth-of-type(2),.square:nth-of-type(3),.square:nth-of-type(4),.square:nth-of-type(5),.square:nth-of-type(6) {border-bottom:10px solid #94b7ed;}.square:nth-of-type(1),.square:nth-of-type(2),.square:nth-of-type(4),.square:nth-of-type(5),.square:nth-of-type(7),.square:nth-of-type(8) {border-right:10px solid #94b7ed;}.ai-label {position:absolute;}#aiDraw {display:none;font-size:1.5rem;padding:1em;box-sizing:border-box;position:fixed;width:100%;height:100%;background:rgba(0, 0, 0, 0.85);top:0;bottom:0;left:0;right:0;margin:0;cursor:pointer;z-index:2;}.window {padding:25px;position:absolute;top:50%;left:50%;width:650px;transform:translate(-50%, -50%);}.top-sticky {position:fixed;top:25px;right:25px;margin-top:0;} }</style>
+  </head>
+  <body><div class="window"><h1>COPR</h1><h2>CSS Operation Plan Response</h2><p>Shall we play a game?</p><form><div class="board"><input
+    id="human-checkbox-0"
+    class="checkbox human-checkbox checkbox-0 human-checkbox-0"
+    type="checkbox"><input
+    id="human-checkbox-1"
+    class="checkbox human-checkbox checkbox-1 human-checkbox-1"
+    type="checkbox"><input
+    id="human-checkbox-2"
+    class="checkbox human-checkbox checkbox-2 human-checkbox-2"
+    type="checkbox"><input
+    id="human-checkbox-3"
+    class="checkbox human-checkbox checkbox-3 human-checkbox-3"
+    type="checkbox"><input
+    id="human-checkbox-4"
+    class="checkbox human-checkbox checkbox-4 human-checkbox-4"
+    type="checkbox"><input
+    id="human-checkbox-5"
+    class="checkbox human-checkbox checkbox-5 human-checkbox-5"
+    type="checkbox"><input
+    id="human-checkbox-6"
+    class="checkbox human-checkbox checkbox-6 human-checkbox-6"
+    type="checkbox"><input
+    id="human-checkbox-7"
+    class="checkbox human-checkbox checkbox-7 human-checkbox-7"
+    type="checkbox"><input
+    id="human-checkbox-8"
+    class="checkbox human-checkbox checkbox-8 human-checkbox-8"
+    type="checkbox"><input
+    id="ai-checkbox-0"
+    class="checkbox ai-checkbox checkbox-0 ai-checkbox-0"
+    type="checkbox"><input
+    id="ai-checkbox-1"
+    class="checkbox ai-checkbox checkbox-1 ai-checkbox-1"
+    type="checkbox"><input
+    id="ai-checkbox-2"
+    class="checkbox ai-checkbox checkbox-2 ai-checkbox-2"
+    type="checkbox"><input
+    id="ai-checkbox-3"
+    class="checkbox ai-checkbox checkbox-3 ai-checkbox-3"
+    type="checkbox"><input
+    id="ai-checkbox-4"
+    class="checkbox ai-checkbox checkbox-4 ai-checkbox-4"
+    type="checkbox"><input
+    id="ai-checkbox-5"
+    class="checkbox ai-checkbox checkbox-5 ai-checkbox-5"
+    type="checkbox"><input
+    id="ai-checkbox-6"
+    class="checkbox ai-checkbox checkbox-6 ai-checkbox-6"
+    type="checkbox"><input
+    id="ai-checkbox-7"
+    class="checkbox ai-checkbox checkbox-7 ai-checkbox-7"
+    type="checkbox"><input
+    id="ai-checkbox-8"
+    class="checkbox ai-checkbox checkbox-8 ai-checkbox-8"
+    type="checkbox"><label
+    id="ai-label-0"
+    for="ai-checkbox-0"
+    class="label ai-label label-0 ai-label-0">
+      Best move calculated. <span class="button">Proceed</span>
+    </label><label
+    id="ai-label-1"
+    for="ai-checkbox-1"
+    class="label ai-label label-1 ai-label-1">
+      Best move calculated. <span class="button">Proceed</span>
+    </label><label
+    id="ai-label-2"
+    for="ai-checkbox-2"
+    class="label ai-label label-2 ai-label-2">
+      Best move calculated. <span class="button">Proceed</span>
+    </label><label
+    id="ai-label-3"
+    for="ai-checkbox-3"
+    class="label ai-label label-3 ai-label-3">
+      Best move calculated. <span class="button">Proceed</span>
+    </label><label
+    id="ai-label-4"
+    for="ai-checkbox-4"
+    class="label ai-label label-4 ai-label-4">
+      Best move calculated. <span class="button">Proceed</span>
+    </label><label
+    id="ai-label-5"
+    for="ai-checkbox-5"
+    class="label ai-label label-5 ai-label-5">
+      Best move calculated. <span class="button">Proceed</span>
+    </label><label
+    id="ai-label-6"
+    for="ai-checkbox-6"
+    class="label ai-label label-6 ai-label-6">
+      Best move calculated. <span class="button">Proceed</span>
+    </label><label
+    id="ai-label-7"
+    for="ai-checkbox-7"
+    class="label ai-label label-7 ai-label-7">
+      Best move calculated. <span class="button">Proceed</span>
+    </label><label
+    id="ai-label-8"
+    for="ai-checkbox-8"
+    class="label ai-label label-8 ai-label-8">
+      Best move calculated. <span class="button">Proceed</span>
+    </label>
+  <div class="square square-0">
+  <label
+    id="human-label-0"
+    for="human-checkbox-0"
+    class="label human-label label-0 human-label-0">
+      
+    </label>
+  <div id="ai-result-0"
+    class="result ai-result result-0 ai-result-0"></div>
+  <div id="human-result-0"
+           class="result human-result result-0 human-result-0"></div>
+  </div>
+  
+  <div class="square square-1">
+  <label
+    id="human-label-1"
+    for="human-checkbox-1"
+    class="label human-label label-1 human-label-1">
+      
+    </label>
+  <div id="ai-result-1"
+    class="result ai-result result-1 ai-result-1"></div>
+  <div id="human-result-1"
+           class="result human-result result-1 human-result-1"></div>
+  </div>
+  
+  <div class="square square-2">
+  <label
+    id="human-label-2"
+    for="human-checkbox-2"
+    class="label human-label label-2 human-label-2">
+      
+    </label>
+  <div id="ai-result-2"
+    class="result ai-result result-2 ai-result-2"></div>
+  <div id="human-result-2"
+           class="result human-result result-2 human-result-2"></div>
+  </div>
+  
+  <div class="square square-3">
+  <label
+    id="human-label-3"
+    for="human-checkbox-3"
+    class="label human-label label-3 human-label-3">
+      
+    </label>
+  <div id="ai-result-3"
+    class="result ai-result result-3 ai-result-3"></div>
+  <div id="human-result-3"
+           class="result human-result result-3 human-result-3"></div>
+  </div>
+  
+  <div class="square square-4">
+  <label
+    id="human-label-4"
+    for="human-checkbox-4"
+    class="label human-label label-4 human-label-4">
+      
+    </label>
+  <div id="ai-result-4"
+    class="result ai-result result-4 ai-result-4"></div>
+  <div id="human-result-4"
+           class="result human-result result-4 human-result-4"></div>
+  </div>
+  
+  <div class="square square-5">
+  <label
+    id="human-label-5"
+    for="human-checkbox-5"
+    class="label human-label label-5 human-label-5">
+      
+    </label>
+  <div id="ai-result-5"
+    class="result ai-result result-5 ai-result-5"></div>
+  <div id="human-result-5"
+           class="result human-result result-5 human-result-5"></div>
+  </div>
+  
+  <div class="square square-6">
+  <label
+    id="human-label-6"
+    for="human-checkbox-6"
+    class="label human-label label-6 human-label-6">
+      
+    </label>
+  <div id="ai-result-6"
+    class="result ai-result result-6 ai-result-6"></div>
+  <div id="human-result-6"
+           class="result human-result result-6 human-result-6"></div>
+  </div>
+  
+  <div class="square square-7">
+  <label
+    id="human-label-7"
+    for="human-checkbox-7"
+    class="label human-label label-7 human-label-7">
+      
+    </label>
+  <div id="ai-result-7"
+    class="result ai-result result-7 ai-result-7"></div>
+  <div id="human-result-7"
+           class="result human-result result-7 human-result-7"></div>
+  </div>
+  
+  <div class="square square-8">
+  <label
+    id="human-label-8"
+    for="human-checkbox-8"
+    class="label human-label label-8 human-label-8">
+      
+    </label>
+  <div id="ai-result-8"
+    class="result ai-result result-8 ai-result-8"></div>
+  <div id="human-result-8"
+           class="result human-result result-8 human-result-8"></div>
+  </div>
+  <div id="aiWin"><div>COPR wins. The only winning move is not to play.</div><a class="button" href=".">Play again</a><a class="button" href="https://github.com/chadian/copr">Star on Github</a></div><div id="aiDraw"><div>Stalemate.</div><a class="button" href=".">Play again</a><a class="button" href="https://github.com/chadian/copr">Star on Github</a></div><div class="clear-fix"></div></div><button type="reset" class="button">Restart</button></form><link rel="stylesheet" type="text/css" href="./logical.css" /><div class="top-sticky"><a class="button" href="https://github.com/chadian/copr">Star on Github</a></div><link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet"></div></body></html>
