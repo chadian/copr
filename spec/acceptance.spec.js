@@ -9,7 +9,7 @@ import StaticServer from "static-server";
 import path from "path";
 
 const dist = path.resolve(__dirname, "../dist/");
-const STATIC_SERVER_PORT = 5000;
+const STATIC_SERVER_PORT = 5555;
 const STATIC_SERVER_URL = `http://localhost:${STATIC_SERVER_PORT}`;
 
 let server;
