@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel-node src",
-    "test": "babel-node spec/support/run.js",
+    "test": "NODE_ENV=test babel-node spec/support/run.js",
     "eslint": "eslint src spec",
     "format": "eslint --fix src spec"
   },
