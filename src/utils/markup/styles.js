@@ -379,7 +379,7 @@ const computedStyles = {
     return new Style(selector, {
       width: "100%",
       height: "100%",
-      "background-image": `url("data:image/svg+xml;base64,${Buffer(
+      "background-image": `url("data:image/svg+xml;base64,${Buffer.from(
         svg
       ).toString("base64")}")`,
       "background-size": "85%",
@@ -420,7 +420,7 @@ const computedStyles = {
     const svg =
       '<svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg"><title>Oval</title><circle cx="55.25" cy="55.25" r="47.25" stroke-width="15" stroke="#94B7ED" fill="none" fill-rule="evenodd"/></svg>';
     return new Style(selector, {
-      "background-image": `url("data:image/svg+xml;base64,${Buffer(
+      "background-image": `url("data:image/svg+xml;base64,${Buffer.from(
         svg
       ).toString("base64")}")`,
       "background-size": "85%",
