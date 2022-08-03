@@ -12,8 +12,8 @@
   "scripts": {
     "build": "node src/index.js",
     "test": "NODE_ENV=test node --experimental-vm-modules ./node_modules/.bin/jest spec",
-    "eslint": "eslint src spec",
-    "format": "eslint --fix src spec"
+    "lint": "eslint src spec",
+    "format": "yarn lint --fix"
   },
   "dependencies": {
     "cssnano": "^3.10.0",
@@ -21,14 +21,13 @@
     "ramda": "^0.25.0"
   },
   "devDependencies": {
-    "eslint": "^4.15.0",
+    "eslint": "^8.21.0",
     "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-jasmine": "^2.10.1",
+    "eslint-plugin-jest": "^26.7.0",
     "eslint-plugin-prettier": "^3.0.0",
     "jest": "^28.1.3",
+    "node-static": "^0.7.11",
     "prettier": "^1.15.3",
-    "proxyquire": "^1.8.0",
-    "puppeteer": "^0.13.0",
-    "static-server": "^3.0.0"
+    "puppeteer": "^0.13.0"
   }
 }

@@ -1,9 +1,11 @@
 import Board from "../src/board";
 import Player from "../src/player";
-import recommendBestMove from "../src/utils/recommend-best-move";
-import scoreBoard from "../src/utils/score-board";
+import recommendBestMove, {
+  rawRecommendBestMove
+} from "../src/utils/recommend-best-move";
 import { playerX, playerO, _ } from "./stubs/player";
 import * as position from "./stubs/position";
+import { clearCache, getCacheHits } from "../src/utils/cache";
 
 const X = playerX.symbol;
 const O = playerO.symbol;
@@ -72,50 +74,29 @@ describe("recommend-best-move", () => {
   });
 
   describe("cache", () => {
-    let scoreBoardSpy;
     beforeEach(() => {
-      scoreBoardSpy = jest.fn();
-      recommendBestMove.__Rewire__("scoreBoard", scoreBoardSpy);
-    });
-
-    afterEach(() => {
-      recommendBestMove.__ResetDependency__("scoreBoard");
+      clearCache();
     });
 
     it("pulls from cache on subsequent calls with the same args", () => {
       const board = new Board([X, O, _, _, _, _, _, _, _]);
 
-      // call for move recommendation on spy
       const initialRecommendation = recommendBestMove(board, playerX, playerO);
-
-      // given the board, each empty spot will be called once with
-      // `scoreBoard` _within_ `recommend-best-move` once. Recursive
-      // calls of `scoreBoard` on itself will not be captured by the spy
-      // since the spy has only been applied via proxyquiring the
-      // `recommend-best-move` module.
-      expect(scoreBoardSpy.mock.calls.length).toBe(7);
+      expect(getCacheHits(rawRecommendBestMove)).toBe(0);
 
       // make another call
       expect(recommendBestMove(board, playerX, playerO)).toBe(
         initialRecommendation
       );
 
-      // relying on cache, no additional calls to scoreBoard should have been made
-      expect(scoreBoardSpy.mock.calls.length).toBe(7);
+      expect(getCacheHits(rawRecommendBestMove)).toBe(1);
     });
 
     it("pulls from cache a generic solution given the same board with different players", () => {
       const board = new Board([X, _, O, X, _, _, _, _, _]);
 
       const initialRecommenation = recommendBestMove(board, playerX, playerO);
-
-      // each empty spot will be called once with
-      // `scoreBoard` _within_ `recommend-best-move` once. Recursive
-      // calls of `scoreBoard` on itself will not be captured by the spy
-      // since the spy has only been applied via proxyquire within
-      // `recommend-best-move`.
-      // six empty spots on the board => 6 calls
-      expect(scoreBoardSpy.mock.calls.length).toBe(6);
+      expect(getCacheHits(rawRecommendBestMove)).toBe(0);
 
       const A = "😀";
       const B = "👾";
@@ -134,9 +115,7 @@ describe("recommend-best-move", () => {
         initialRecommenation
       );
 
-      // still only six calls were made, memoized on generic solution
-      // regardless of players passed in
-      expect(scoreBoardSpy.mock.calls.length).toBe(6);
+      expect(getCacheHits(rawRecommendBestMove)).toBe(1);
     });
   });
 });

@@ -43,3 +43,4 @@ function recommendBestMove(board, previousPlayer, nextPlayer) {
 }
 
 export default memoizeBoardWithPlayers(recommendBestMove);
+export { recommendBestMove as rawRecommendBestMove };
