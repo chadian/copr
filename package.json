@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "node src/index.js",
-    "test": "NODE_ENV=test node spec/support/run.js",
+    "test": "NODE_ENV=test node --experimental-vm-modules ./node_modules/.bin/jest spec",
     "eslint": "eslint src spec",
     "format": "eslint --fix src spec"
   },
