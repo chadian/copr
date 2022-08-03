@@ -1,8 +1,9 @@
-import Board from "./board";
-import Player from "./player";
-import recommendationHash from "./utils/recommendations-hash";
-import { BOARD_INDEXES } from "./utils/markup/constants";
-import { saveToFile, processCss } from "./utils/compile";
+import Board from "./board.js";
+import Player from "./player.js";
+import recommendationHash from "./utils/recommendations-hash.js";
+import { BOARD_INDEXES } from "./utils/markup/constants.js";
+import { saveToFile, processCss } from "./utils/compile.js";
+
 import {
   containerStart,
   containerEnd,
@@ -12,13 +13,14 @@ import {
   boardSquare,
   starOnGithub,
   playAgain
-} from "./utils/markup/templates";
+} from "./utils/markup/templates.js";
+
 import {
   StyleSheet,
   baseStyles,
   computedStyles,
   mediaQueryAboveMobileStyles
-} from "./utils/markup/styles";
+} from "./utils/markup/styles.js";
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 const isProduction = NODE_ENV === "production";

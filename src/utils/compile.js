@@ -16,7 +16,7 @@ const hasAccess = dir => {
   }
 };
 
-function processCss(rawCssString, compress = false) {
+export function processCss(rawCssString, compress = false) {
   const cssMinifier = postcss([cssnano]).process(rawCssString);
   const processedCss = compress
     ? cssMinifier
@@ -24,7 +24,7 @@ function processCss(rawCssString, compress = false) {
   return processedCss;
 }
 
-function saveToFile(string, filePath, gzip = false) {
+export function saveToFile(string, filePath, gzip = false) {
   const dirPath = path.dirname(filePath);
   if (!hasAccess(dirPath)) fs.mkdirSync(dirPath);
 
@@ -43,5 +43,3 @@ function saveToFile(string, filePath, gzip = false) {
     .pipe(writeStream)
     .on("finish", () => console.log(`Finished writing ${filePath}`));
 }
-
-export { saveToFile, processCss };

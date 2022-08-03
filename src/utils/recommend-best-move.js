@@ -1,6 +1,6 @@
-import Board from "../board";
-import scoreBoard from "./score-board";
-import { memoizeBoardWithPlayers } from "./cache";
+import Board from "../board.js";
+import scoreBoard from "./score-board.js";
+import { memoizeBoardWithPlayers } from "./cache.js";
 
 function recommendBestMove(board, previousPlayer, nextPlayer) {
   const emptySpots = board.spotsForSymbol(Board.EMPTY_SPOT_SYMBOL);
@@ -43,3 +43,4 @@ function recommendBestMove(board, previousPlayer, nextPlayer) {
 }
 
 export default memoizeBoardWithPlayers(recommendBestMove);
+export { recommendBestMove as rawRecommendBestMove };

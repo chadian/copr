@@ -5,17 +5,46 @@ import * as position from "./stubs/position";
 import { uniq } from "ramda";
 import { classFormat, fullId } from "../src/utils/markup/formats";
 import puppeteer from "puppeteer";
-import StaticServer from "static-server";
-import path from "path";
+import * as statik from "node-static";
+import { jest } from "@jest/globals";
+import * as http from "http";
 
-const dist = path.resolve(__dirname, "../dist/");
-const STATIC_SERVER_PORT = 5000;
+jest.setTimeout(15000);
+
+const dist = new URL("../dist/", import.meta.url)
+  .toString()
+  .replace("file://", "");
+const STATIC_SERVER_PORT = 2222;
 const STATIC_SERVER_URL = `http://localhost:${STATIC_SERVER_PORT}`;
 
-let server;
-let browser;
+async function createServer() {
+  const file = new statik.Server(dist);
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+  let server;
+
+  await new Promise(resolve => {
+    server = http
+      .createServer(function(request, response) {
+        request
+          .addListener("end", function() {
+            file.serve(request, response);
+          })
+          .resume();
+      })
+      .listen(STATIC_SERVER_PORT, resolve);
+  });
+
+  return {
+    async close() {
+      return new Promise(resolve => {
+        server.close(resolve);
+      });
+    }
+  };
+}
+
+let browser;
+let server;
 
 const selectAll = page => selector =>
   page.$$(selector).then(promisedElements => Promise.all(promisedElements));
@@ -36,21 +65,16 @@ const computedStyle = page => (selector, styleProp) =>
 
 describe("Acceptance", () => {
   beforeAll(async () => {
-    server = new StaticServer({ port: STATIC_SERVER_PORT, rootPath: dist });
-
-    const serverStart = new Promise(resolve => server.start(resolve));
     browser = await puppeteer.launch();
-
-    return Promise.all([browser, serverStart]);
+    server = await createServer();
   });
 
-  afterAll(async done => {
+  afterAll(async () => {
     await browser.close();
-    server.stop();
-    done();
+    await server.close();
   });
 
-  it("sees a rendered board", async done => {
+  it("sees a rendered board", async () => {
     const page = await browser.newPage();
     await page.goto(STATIC_SERVER_URL);
     const styles = computedStyle(page);
@@ -61,11 +85,10 @@ describe("Acceptance", () => {
     expect(display.length).toBe(1);
     expect(display).toContain("block");
 
-    page.close();
-    done();
+    await page.close();
   });
 
-  it("plays the game to a stalemate", async done => {
+  it("plays the game to a stalemate", async () => {
     const page = await browser.newPage();
     await page.goto(STATIC_SERVER_URL);
     const styles = computedStyle(page);
@@ -99,6 +122,5 @@ describe("Acceptance", () => {
 
     // expect tie game screen to display: block
     expect(await tieGameDisplay()).toContain("block");
-    done();
   });
 });
