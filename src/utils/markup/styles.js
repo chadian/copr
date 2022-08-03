@@ -1,5 +1,5 @@
-import { BOARD_ELEMENT, PLAYER } from "./constants";
-import { fullId } from "./formats";
+import { BOARD_ELEMENT, PLAYER } from "./constants.js";
+import { fullId } from "./formats.js";
 
 class Style {
   constructor(selectors, style) {

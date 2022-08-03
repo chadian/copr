@@ -1,5 +1,5 @@
-import { fullId, classFormat } from "./formats";
-import { BOARD_ELEMENT, PLAYER } from "./constants";
+import { fullId, classFormat } from "./formats.js";
+import { BOARD_ELEMENT, PLAYER } from "./constants.js";
 
 const checkbox = (prefix, index) => {
   return `<input

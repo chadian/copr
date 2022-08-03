@@ -74,9 +74,7 @@ describe("recommend-best-move", () => {
   describe("cache", () => {
     let scoreBoardSpy;
     beforeEach(() => {
-      scoreBoardSpy = jasmine
-        .createSpy("scoreBoardSpy", scoreBoard)
-        .and.callThrough();
+      scoreBoardSpy = jest.fn();
       recommendBestMove.__Rewire__("scoreBoard", scoreBoardSpy);
     });
 
@@ -95,7 +93,7 @@ describe("recommend-best-move", () => {
       // calls of `scoreBoard` on itself will not be captured by the spy
       // since the spy has only been applied via proxyquiring the
       // `recommend-best-move` module.
-      expect(scoreBoardSpy.calls.count()).toBe(7);
+      expect(scoreBoardSpy.mock.calls.length).toBe(7);
 
       // make another call
       expect(recommendBestMove(board, playerX, playerO)).toBe(
@@ -103,7 +101,7 @@ describe("recommend-best-move", () => {
       );
 
       // relying on cache, no additional calls to scoreBoard should have been made
-      expect(scoreBoardSpy.calls.count()).toBe(7);
+      expect(scoreBoardSpy.mock.calls.length).toBe(7);
     });
 
     it("pulls from cache a generic solution given the same board with different players", () => {
@@ -117,7 +115,7 @@ describe("recommend-best-move", () => {
       // since the spy has only been applied via proxyquire within
       // `recommend-best-move`.
       // six empty spots on the board => 6 calls
-      expect(scoreBoardSpy.calls.count()).toBe(6);
+      expect(scoreBoardSpy.mock.calls.length).toBe(6);
 
       const A = "😀";
       const B = "👾";
@@ -138,7 +136,7 @@ describe("recommend-best-move", () => {
 
       // still only six calls were made, memoized on generic solution
       // regardless of players passed in
-      expect(scoreBoardSpy.calls.count()).toBe(6);
+      expect(scoreBoardSpy.mock.calls.length).toBe(6);
     });
   });
 });

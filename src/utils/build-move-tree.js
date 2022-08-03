@@ -1,6 +1,6 @@
-import Board from "../board";
-import { memoizeBoardWithPlayers } from "./cache";
-import winnerOfBoard from "./winner-of-board";
+import Board from "../board.js";
+import { memoizeBoardWithPlayers } from "./cache.js";
+import winnerOfBoard from "./winner-of-board.js";
 
 const memoizedBuild = memoizeBoardWithPlayers(buildMoveTree);
 

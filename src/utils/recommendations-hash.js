@@ -1,6 +1,6 @@
-import buildMoveTree from "./build-move-tree";
-import recommendBestMove from "./recommend-best-move";
-import winnerOfBoard from "./winner-of-board";
+import buildMoveTree from "./build-move-tree.js";
+import recommendBestMove from "./recommend-best-move.js";
+import winnerOfBoard from "./winner-of-board.js";
 
 export default function recommendationHash(board, player, opponent) {
   const hash = {};
