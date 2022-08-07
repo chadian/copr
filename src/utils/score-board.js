@@ -12,21 +12,24 @@ function scoreBoard(board, favouredPlayer, previousPlayer, nextPlayer) {
   return recursiveScore(moveTree, favouredPlayer);
 }
 
-function recursiveScore(moveNode, favouredPlayer) {
+function recursiveScore(moveNode, favouredPlayer, depth = 1) {
   const { board, children, nextPlayer } = moveNode;
 
   const winner = winnerOfBoard(board);
   if (winner !== null) {
-    return winner === favouredPlayer.symbol ? POINTS.WIN : POINTS.LOSS;
-  }
+    const points = winner === favouredPlayer.symbol ? POINTS.WIN : POINTS.LOSS;
 
-  if (board.isFull()) {
+    // this takes the points awarded for a win or loss and diminished by depth
+    const depthAdjustedScore = points / depth;
+    return depthAdjustedScore;
+  } else if (board.isFull()) {
     return POINTS.DRAW;
   }
 
   const childrenScores = children.map(node =>
-    recursiveScore(node, favouredPlayer)
+    recursiveScore(node, favouredPlayer, depth + 1)
   );
+
   // maximize for favoured player's turn, minimize for opponent
   const limitingFunction = nextPlayer === favouredPlayer ? Math.max : Math.min;
   return limitingFunction(...childrenScores);
