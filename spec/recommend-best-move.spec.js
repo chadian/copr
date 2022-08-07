@@ -43,6 +43,13 @@ describe("recommend-best-move", () => {
         position.BOTTOM_LEFT
       );
     });
+
+    it("picks the quickest winning move (edge case)", () => {
+      const board = new Board([X, _, _, _, O, _, X, O, X]);
+      expect(recommendBestMove(board, playerX, playerO)).toBe(
+        position.TOP_MIDDLE
+      );
+    });
   });
 
   describe("follows what I would think is common sense...", () => {
